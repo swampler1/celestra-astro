@@ -4,7 +4,7 @@ V* MY Lup is a young low-mass stellar object located in the Lupus star-forming r
 
 Disk Structure and Kinematics
 
-The protoplanetary disk surrounding MY Lup has been observed to have a high inclination, with a disk inclination of approximately 70 degrees and a position angle (PA) of 140 degrees, as derived from ALMA observations [DECO table]. The disk exhibits a complex structure, including rings and gaps, indicative of ongoing dynamical processes. Observations from ALMA have revealed dark bands and bright rings at specific distances, with the presence of CO2 and HCN isotopologues providing insights into the disk's temperature and column density distributions [2]. The disk's physical structure is further characterized by a distance of approximately 150 parsecs from Earth, a stellar mass of about 0.7 solar masses, and a systemic velocity of 6.5 km/s [DECO table].
+The protoplanetary disk surrounding MY Lup has been observed to have a high inclination, with a disk inclination of approximately 70 degrees and a position angle (PA) of 140 degrees, as derived from ALMA observations [source-parameter table]. The disk exhibits a complex structure, including rings and gaps, indicative of ongoing dynamical processes. Observations from ALMA have revealed dark bands and bright rings at specific distances, with the presence of CO2 and HCN isotopologues providing insights into the disk's temperature and column density distributions [2]. The disk's physical structure is further characterized by a distance of approximately 150 parsecs from Earth, a stellar mass of about 0.7 solar masses, and a systemic velocity of 6.5 km/s [source-parameter table].
 
 The kinematics of the disk have been studied using high-resolution CO observations, which indicate a vertical distribution of CO emission that varies with radius. The emission surfaces trace approximately 2-5 times the gas pressure scale heights, suggesting a flared disk structure that influences the dynamics of gas and dust within the disk [6]. The analysis of CO emission has also revealed local temperature variations that correspond to dust substructures, providing insights into the potential locations of embedded planets [6]. 
 
@@ -26,7 +26,7 @@ Observational Methods
 
 The study of MY Lup has employed a variety of observational methods, utilizing both ground-based and space-based telescopes to gather comprehensive data on the disk's properties. The Hubble Space Telescope has been instrumental in measuring the mass accretion rate through observations of emission lines and far-ultraviolet continuum excess emission [1]. The JWST has provided high-resolution mid-infrared spectroscopy, allowing for the detection of various molecular species and isotopologues within the disk [2, 5].
 
-ALMA has played a crucial role in imaging the disk's structure at millimeter wavelengths, revealing the presence of rings and gaps that indicate complex dynamical processes [6, 9]. The combination of these observational techniques has enabled researchers to derive key parameters such as disk inclination, position angle, and systemic velocity, which are essential for understanding the disk's dynamics and evolution [DECO table].
+ALMA has played a crucial role in imaging the disk's structure at millimeter wavelengths, revealing the presence of rings and gaps that indicate complex dynamical processes [6, 9]. The combination of these observational techniques has enabled researchers to derive key parameters such as disk inclination, position angle, and systemic velocity, which are essential for understanding the disk's dynamics and evolution [source-parameter table].
 
 The analysis of the data has involved sophisticated modeling techniques, including slab models for spectral fitting and iterative procedures for refining surface density profiles [2, 8]. The integration of multi-wavelength observations has proven vital for constructing a comprehensive picture of the physical and chemical conditions within the MY Lup disk.
 
@@ -40,7 +40,7 @@ The ongoing studies of MY Lup emphasize the importance of high-resolution observ
 
 References
 
-[1] DECO data table  
+[1] source-parameter data table  
 [2] Salyk et al., 2025, Comprehensive study of isotopic compositions in protoplanetary disks, AJ, 169, 184  
 [3] Aoyama et al., 2025, Mid-infrared spectroscopy of protoplanetary disks, AJ, 170, 67  
 [4] Avenhaus et al., 2018, DARTTS-S survey findings, ApJ, 863, 44  

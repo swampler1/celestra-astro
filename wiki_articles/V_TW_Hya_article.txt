@@ -36,7 +36,7 @@ Overall, the findings related to TW Hya contribute significantly to the broader 
 
 References
 
-[1] DECO data table  
+[1] source-parameter data table  
 [2] Donati et al., 2024, The role of magnetic fields in star and planet formation processes, MNRAS, 531.3256D  
 [3] Vioque et al., 2011, Spectral analysis of TW Hya, ApJ, 732.8  
 [4] Whelan et al., 2024, Mass accretion processes in Classical T Tauri Stars, ApJ, 970.118W  

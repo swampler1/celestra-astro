@@ -40,7 +40,7 @@ The integration of multi-wavelength observations has proven essential for constr
 
 References
 
-[1] DECO data table  
+[1] source-parameter data table  
 [2] F. et al., 2023, Investigating forbidden emission lines in protostellar outflows and jets, A&A, 670A.126  
 [3] S. et al., 2022, Investigating pebble drift and trapping in protoplanetary disks, A&A, 660A.126  
 [4] L. et al., 2023, Variability and mass-accretion rates of Classical T Tauri Stars in the Taurus Molecular Cloud, AJ, 166...82  

@@ -6,7 +6,7 @@ from .gemini_provider import GeminiProvider
 from .openai_provider import OpenAIProvider
 
 DEFAULT_MODELS = {
-    "openai": {"summary": "gpt-4.1-mini", "article": "gpt-4.1"},
+    "openai": {"summary": "gpt-5.6-luna", "article": "gpt-5.6-terra"},
     "gemini": {"summary": "gemini-2.5-flash-lite", "article": "gemini-2.5-flash"},
     "claude": {"summary": "claude-3-5-sonnet-latest", "article": "claude-3-5-sonnet-latest"},
 }

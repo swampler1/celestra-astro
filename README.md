@@ -1,4 +1,4 @@
-# JOSS_DECO Wiki Maker
+# Source Article Generator
 
 ## What This Repo Does
 This repository builds citation-backed wiki-style source summaries for astronomical targets by combining structured catalog values, literature sources, and LLM-generated paper summaries. User-provided catalog or observational values can be incorporated into the final article alongside literature-derived context. Given a source name, the pipeline queries SIMBAD to identify aliases and locate a user-defined number of relevant papers. It then uses Harvard ADS to retrieve PDFs, summarizes each paper in configurable chunks, and synthesizes those summaries and any user provided values into a final article with footnote-style citations. 
@@ -30,7 +30,7 @@ To isntall the repository the user should follow this workflow.
 
 '''
 git clone https://github.com/swampler1/Source-Article-Generator
-cd JOSS_DECO_wiki_maker
+cd Source-Article-Generator
 python -m venv .<your_venv_name>
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -50,11 +50,11 @@ Athropic Claude: https://platform.claude.com/docs/en/api/overview
 ## Quickstart
 A basic version of the command to run the tool:
 ```bash
-PYTHONPATH=src python -m joss_deco --config configs/default.yaml --targets-file targets.txt
+PYTHONPATH=src python -m source_article_generator --config configs/default.yaml --targets-file targets.txt
 ```
 Where: 
--PYTHONPATH=src tells Python to look in the src/ directory so it can import the joss_deco package.
--python -m joss_deco runs the joss_deco module as a command-line program.
+-PYTHONPATH=src tells Python to look in the src/ directory so it can import the source_article_generator package.
+-python -m source_article_generator runs the source_article_generator module as a command-line program.
 --config is the path to the config file
 --targets-file is the path to the targets.txt file/
 
@@ -69,7 +69,7 @@ The objects the pipeline will generate articles for, either passed directly on t
 Config file
 The main control point for a run. This sets models, providers, limits, prompt file paths, and output locations.
 
-DECO CSV path
+CSV path
 The path to the master table containing fixed global source parameters such as distance, stellar mass, and disk inclination.
 
 Prompt templates
@@ -94,19 +94,20 @@ Most user customization happens through the config file rather than by editing P
 A simple example looks like this:
 
 #Code-----------------------------------------------------
-deco_csv_path: DECO_Master_Sample_Doc_SimpleDictionary.csv
+source_parameters_csv_path: Master_Sample_Source_Parameters.csv
 scraped_table_dir: Scraped_Table_Data
 paper_pdfs_root: paper_pdfs
 summaries_root: summaries
-articles_dir: DECO_wiki_articles
+articles_dir: wiki_articles
 logs_dir: logs
 
 paper_limit: 10
-max_chunks_per_paper: 7
+max_chunks_per_paper: 0
+chunk_size_chars: 3500
 
 provider: openai
-summary_model: gpt-4.1-mini
-article_model: gpt-4.1
+summary_model: gpt-5.6-luna
+article_model: gpt-5.6-terra
 
 article_template: prompts/article.txt
 summary_chunk_template: prompts/summary_chunk.txt
@@ -114,10 +115,11 @@ summary_merge_template: prompts/summary_merge.txt
 #--------------------------------------------------------
 
 In this example:
-- deco_csv_path points to the master source-parameter table.
+- source_parameters_csv_path points to the master source-parameter table.
 - scraped_table_dir, paper_pdfs_root, summaries_root, articles_dir, and logs_dir control where intermediate and final files are stored.
 - paper_limit sets how many papers are used per target.
-- max_chunks_per_paper sets how much of each paper is summarized.
+- max_chunks_per_paper sets how much of each paper is summarized. A value of 0 processes the whole paper, subject to the safety limit in the configuration.
+- chunk_size_chars controls the approximate size of each text chunk sent to the model.
 - provider, summary_model, and article_model choose the LLM backend and models.
 - article_template, summary_chunk_template, and summary_merge_template point to the prompt files used during generation.
 
@@ -146,7 +148,7 @@ This lets users test prompt variants or adapt the pipeline to different writing 
 
 ## Custom CSV files
 
-The path to the master source-parameter table is controlled by deco_csv_path in the config file. This CSV lets you provide a catalog of fixed source values drawn from your own observational dataset or curated table.
+The path to the master source-parameter table is controlled by source_parameters_csv_path in the config file. This CSV lets you provide a catalog of fixed source values drawn from your own observational dataset or curated table.
 
 These values are meant to act as the authoritative global parameters for each source and are injected directly into the article prompt rather than being inferred from the literature summaries. For example, values such as distance, stellar mass, and disk inclination can be supplied in this file and treated as fixed inputs for article generation.
 
@@ -170,14 +172,14 @@ In addition to the command-line workflow, the pipeline can also be run directly 
 A simple example looks like this:
 
 #Code-----------------------------------------------------
-from joss_deco import RunConfig, run_targets
+from source_article_generator import RunConfig, run_targets
 
 cfg = RunConfig(
     provider="openai",
-    summary_model="gpt-4.1-mini",
-    article_model="gpt-4.1",
+    summary_model="gpt-5.6-luna",
+    article_model="gpt-5.6-terra",
     paper_limit=10,
-    max_chunks_per_paper=7,
+    max_chunks_per_paper=0,
     article_template="prompts/article.txt",
 )
 
@@ -213,7 +215,7 @@ Local paper PDFs organized by target.
 summaries/
 Cached paper summary files organized by target.
 
-DECO_wiki_articles/
+wiki_articles/
 Default location for generated article text files.
 
 logs/
@@ -230,6 +232,9 @@ Thin wrapper that launches the refactored pipeline.
 wiki_writer.py
 Older monolithic script kept mainly for historical reference.
 
+ads_downloader.py
+Portable Python script for ADS downloads and PDF inspection, converted from the former exploratory notebook.
+
 make_article_summary_text.py
 Helper script for stitching an article together with its summaries into one text file.
 
@@ -242,8 +247,7 @@ Python dependency list for the project.
 targets.txt
 Example newline-delimited list of targets to run.
 
-DECO_Master_Sample_Doc_SimpleDictionary.csv
+Master_Sample_Source_Parameters.csv
 Example master source-parameter table used by the pipeline.
 
 ## Notes on Current State
-

@@ -8,11 +8,11 @@ The protoplanetary disk around V1094 Sco has been characterized as a giant multi
 
 The disk's structure has been modeled using Fourier-transformed Gaussian fits, which reveal a bright core and a more extended continuum emission that is fainter than the rings. The analysis of the intensity distribution shows that the rings at 130 ± 9 AU and 220 ± 16 AU are surrounded by gaps at 100 ± 6 AU and 170 ± 13 AU. The spectral index αmm of the continuum emission varies with radius, exhibiting a low value in the inner disk that increases outward, influenced by image noise properties and flux calibration errors [1].
 
-The kinematics of the disk have been studied through the detection of molecular gas emissions, particularly in the 12CO and 13CO lines. The gas disk mass has been estimated using the C18O J=2-1 line fluxes in conjunction with disk models, revealing a gas-to-dust mass ratio that ranges between 10 and 100 across the Lupus sample. This ratio is consistent with median values for well-resolved sources, indicating a correlation between gas and dust disk masses [2]. The systemic velocity of V1094 Sco is measured at 5.50 km/s, which is critical for understanding the dynamics of the disk [DECO table].
+The kinematics of the disk have been studied through the detection of molecular gas emissions, particularly in the 12CO and 13CO lines. The gas disk mass has been estimated using the C18O J=2-1 line fluxes in conjunction with disk models, revealing a gas-to-dust mass ratio that ranges between 10 and 100 across the Lupus sample. This ratio is consistent with median values for well-resolved sources, indicating a correlation between gas and dust disk masses [2]. The systemic velocity of V1094 Sco is measured at 5.50 km/s, which is critical for understanding the dynamics of the disk [source-parameter table].
 
 Physical Conditions
 
-The physical conditions within the disk of V1094 Sco are characterized by a stellar mass of 0.92 M_sun and a distance of 160 pc from Earth [DECO table]. The disk's position angle is measured at 109.44 degrees, with an inclination of 49.17 degrees. These parameters are essential for modeling the disk's geometry and understanding the distribution of material within it.
+The physical conditions within the disk of V1094 Sco are characterized by a stellar mass of 0.92 M_sun and a distance of 160 pc from Earth [source-parameter table]. The disk's position angle is measured at 109.44 degrees, with an inclination of 49.17 degrees. These parameters are essential for modeling the disk's geometry and understanding the distribution of material within it.
 
 The temperature profile of the disk is notably low, with the central region exhibiting a brightness temperature of 13 K. This low temperature suggests that the disk is colder and more massive than typical T Tauri disks, with mass estimates ranging from 0.03 to ≳0.12 M⊙. The absence of a clear dip feature around 10 µm in the spectral energy distribution (SED) indicates that the disk does not have an inner hole, which is often observed in other protoplanetary disks [4]. The flattened disk geometry contributes to the lower temperature, and the study of the SED supports the notion of significant grain growth and sedimentation occurring within the disk [4].
 
@@ -44,7 +44,7 @@ The role of turbulence and its impact on dust settling and accretion processes a
 
 References
 
-[1] DECO data table  
+[1] source-parameter data table  
 [2] 2025ApJ...989....3D, ALMA Survey of Gas Evolution of PROtoplanetary Disks (AGE-PRO), ApJ  
 [3] 2025A&A...694A.147G, Influence of Outer Dust Disc Structures on Inner Disc Composition, A&A  
 [4] 2011ApJ...726...45T, Detection of a Cold, Massive Dust Disk around V1094 Sco, ApJ  

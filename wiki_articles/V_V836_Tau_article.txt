@@ -1,6 +1,6 @@
 Overview
 
-V* V836 Tau is a classical T Tauri star located in the Taurus molecular cloud, notable for its protoplanetary disk and the associated physical processes that govern star and planet formation. The system is characterized by a distance of 167.00 parsecs, a stellar mass of 0.47 solar masses, and a systemic velocity of 7.18 km/s. The disk exhibits a position angle of 112.52 degrees and an inclination of 43.00 degrees, which are critical for understanding the geometry and dynamics of the disk surrounding V836 Tau [DECO table].
+V* V836 Tau is a classical T Tauri star located in the Taurus molecular cloud, notable for its protoplanetary disk and the associated physical processes that govern star and planet formation. The system is characterized by a distance of 167.00 parsecs, a stellar mass of 0.47 solar masses, and a systemic velocity of 7.18 km/s. The disk exhibits a position angle of 112.52 degrees and an inclination of 43.00 degrees, which are critical for understanding the geometry and dynamics of the disk surrounding V836 Tau [source-parameter table].
 
 Disk Structure and Kinematics
 
@@ -38,7 +38,7 @@ The ongoing research into V836 Tau and its disk will likely continue to refine o
 
 References
 
-[1] DECO data table  
+[1] source-parameter data table  
 [2] 2024ApJ...972...19N  
 [3] 2008ApJ...687L.103P  
 [4] 2013ApJ...769...73M  

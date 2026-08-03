@@ -53,19 +53,41 @@ def scrape_table(url, table_index=0):
 
 def get_simbad_aliases(name: str):
     """Return (canonical_main_id, aliases_list) for a SIMBAD object."""
+    canonical = name
+
+    # Resolve the canonical SIMBAD name independently. Some SIMBAD responses
+    # contain no MAIN_ID even though the object-ID query can still succeed.
     try:
         s = Simbad()
         s.add_votable_fields("ids")
         t = s.query_object(name)
-        if t is None or len(t) == 0:
-            return name, []
-        canonical = str(t["MAIN_ID"][0])
+        if t is not None and len(t) > 0:
+            main_column = next(
+                (column for column in t.colnames if column.upper() == "MAIN_ID"),
+                None,
+            )
+            if main_column:
+                canonical = str(t[main_column][0]).strip()
+    except Exception as exc:
+        print(f"[WARN] SIMBAD canonical-name lookup failed for {name!r}: {exc}")
 
+    # Always attempt the alias query, even when canonical lookup returned no
+    # rows. This is the important distinction between the two SIMBAD APIs.
+    try:
         ids_tbl = Simbad.query_objectids(name)
-        aliases = [str(row["ID"]) for row in ids_tbl] if ids_tbl is not None else []
+        if ids_tbl is None or len(ids_tbl) == 0:
+            print(f"[WARN] SIMBAD returned no aliases for {name!r} (canonical: {canonical!r}).")
+            return canonical, []
+
+        id_column = next(
+            (column for column in ids_tbl.colnames if column.upper() == "ID"),
+            ids_tbl.colnames[0],
+        )
+        aliases = [str(value).strip() for value in ids_tbl[id_column] if str(value).strip()]
         return canonical, aliases
-    except Exception:
-        return name, []
+    except Exception as exc:
+        print(f"[WARN] SIMBAD alias lookup failed for {name!r}: {exc}")
+        return canonical, []
 
 
 def get_disk_lit(disk_name_orig, save_dir="Scraped_Table_Data"):
@@ -111,8 +133,16 @@ def get_disk_lit(disk_name_orig, save_dir="Scraped_Table_Data"):
             df = None
 
     if df is not None:
-        filtered_df = df[df["Score"] != ""]
-        filtered_df.loc[:, "Score"] = filtered_df["Score"].astype(int)  # so not treated as strings
+        # SIMBAD can return mixed-type score values and, depending on the
+        # table markup, duplicate column labels. Normalize both before doing
+        # numeric filtering so pandas does not attempt an unsafe string cast.
+        df = df.loc[:, ~df.columns.duplicated()].copy()
+        scores = pd.to_numeric(df["Score"].astype(str).str.strip(), errors="coerce")
+        filtered_df = df.loc[scores.notna()].copy()
+        # Drop the original string column before adding the numeric one. This
+        # avoids pandas' incompatible-dtype assignment error on recent pandas.
+        filtered_df = filtered_df.drop(columns=["Score"])
+        filtered_df.insert(0, "Score", scores.loc[filtered_df.index].astype(int).to_numpy())
         df_sorted = filtered_df.sort_values(by="Score", ascending=False)
         # print(df_sorted)
         print(f"\nTop SIMBAD literature for {disk_name_orig} (sorted by score):")

@@ -9,7 +9,7 @@ from .article import generate_article
 from .config import RunConfig
 from .prompts import DEFAULT_ARTICLE_TEMPLATE, load_template, render_template
 from .providers.factory import get_provider, validate_model_for_provider
-from .deco import format_deco_basic_facts_block, load_deco_basic_facts_table
+from .source_parameters import format_source_parameters_block, load_source_parameters_table
 from .sources import get_disk_lit, get_simbad_aliases, select_papers
 from .summarization import build_summaries_block, ensure_summaries_for_papers
 from .utils import safe_slug
@@ -78,7 +78,7 @@ def run_targets(targets_list, config: RunConfig | None = None, project_root: str
     validate_model_for_provider(cfg.provider, cfg.article_model)
     provider = get_provider(cfg.provider)
 
-    deco_csv_path = _resolve_path(project_root, cfg.deco_csv_path)
+    source_parameters_csv_path = _resolve_path(project_root, cfg.source_parameters_csv_path)
     scraped_table_dir = _resolve_path(project_root, cfg.scraped_table_dir)
     paper_pdfs_root = _resolve_path(project_root, cfg.paper_pdfs_root)
     summaries_root = _resolve_path(project_root, cfg.summaries_root)
@@ -105,14 +105,17 @@ def run_targets(targets_list, config: RunConfig | None = None, project_root: str
     extra_context_block = _build_extra_context_block(project_root, cfg.extra_context_files)
     article_template = load_template(article_template_path, DEFAULT_ARTICLE_TEMPLATE)
 
-    DECO_BASIC_FACTS = load_deco_basic_facts_table(deco_csv_path)
-    if not DECO_BASIC_FACTS:
-        print(f"[WARN] DECO_BASIC_FACTS is empty. Check DECO_CSV_PATH = {deco_csv_path}")
+    SOURCE_PARAMETERS = load_source_parameters_table(source_parameters_csv_path)
+    if not SOURCE_PARAMETERS:
+        print(f"[WARN] SOURCE_PARAMETERS is empty. Check SOURCE_PARAMETERS_CSV_PATH = {source_parameters_csv_path}")
     else:
-        print(f"[INFO] DECO_BASIC_FACTS has {len(DECO_BASIC_FACTS)} entries.")
+        print(f"[INFO] SOURCE_PARAMETERS has {len(SOURCE_PARAMETERS)} entries.")
 
     for target in targets_list:
-        canonical, aliases = get_simbad_aliases(target)
+        # Accept filesystem-friendly target names such as DG_Tau while using
+        # the normal astronomical spelling for SIMBAD and source-table lookup.
+        lookup_target = target.replace("_", " ")
+        canonical, aliases = get_simbad_aliases(lookup_target)
 
         print("\n" + "=" * 72)
         print(f"Target: {target}  (canonical: {canonical})")
@@ -134,9 +137,9 @@ def run_targets(targets_list, config: RunConfig | None = None, project_root: str
 
         canonical_path = safe_slug(canonical)
 
-        deco_block = format_deco_basic_facts_block(target, DECO_BASIC_FACTS)
-        print("DECO basic facts:")
-        print(deco_block)
+        source_parameters_block = format_source_parameters_block(lookup_target, SOURCE_PARAMETERS)
+        print("source parameters:")
+        print(source_parameters_block)
         print()
 
         print("Directory structure:")
@@ -160,6 +163,12 @@ def run_targets(targets_list, config: RunConfig | None = None, project_root: str
             except Exception as e:
                 print(f"[ERROR] Error scraping SIMBAD for {target}: {e}")
                 continue
+        if not os.path.exists(csv_path):
+            print(
+                f"[ERROR] SIMBAD literature table was not created for {canonical}; "
+                "skipping this target."
+            )
+            continue
         else:
             print(f"[INFO] Using existing CSV: {csv_path}")
 
@@ -190,6 +199,8 @@ def run_targets(targets_list, config: RunConfig | None = None, project_root: str
             summary_chunk_template_path=summary_chunk_template_path,
             summary_merge_template_path=summary_merge_template_path,
             max_chunks_per_paper=cfg.max_chunks_per_paper,
+            chunk_size_chars=cfg.chunk_size_chars,
+            safety_max_chunks_per_paper=cfg.safety_max_chunks_per_paper,
             summary_chunk_temperature=cfg.summary_temperature,
             summary_chunk_max_tokens=cfg.summary_chunk_max_tokens,
             summary_merge_temperature=cfg.summary_merge_temperature,
@@ -206,7 +217,7 @@ def run_targets(targets_list, config: RunConfig | None = None, project_root: str
             article_template,
             target=target,
             canonical=canonical,
-            deco_block=deco_block,
+            source_parameters_block=source_parameters_block,
             summaries_block=summaries_block,
             sources_str=sources_str,
         )

@@ -64,11 +64,11 @@ DEFAULT_SUMMARY_MERGE_TEMPLATE = textwrap.dedent(
 
 DEFAULT_ARTICLE_TEMPLATE = textwrap.dedent(
     """
-    DECO BASIC FACTS TABLE FOR {target}:
-    {deco_block}
+    SOURCE PARAMETERS TABLE FOR {target}:
+    {source_parameters_block}
 
-    USE OF DECO PARAMETERS:
-    - The following global properties MUST be taken from the DECO table, not from the papers:
+    USE OF SOURCE PARAMETERS:
+    - The following global properties MUST be taken from the source-parameter table, not from the papers:
       (1) Distance
       (2) Stellar mass
       (3) Systemic velocity
@@ -141,7 +141,7 @@ DEFAULT_ARTICLE_TEMPLATE = textwrap.dedent(
     In the References section, list each source as:
     [n] FirstAuthor et al., Year, Title (or description if unknown), Journal (if known), Bibcode
 
-    The first reference should be the DECO Table in the style "[1] DECO data table"
+    The first reference should be the Source-parameter Table in the style "[1] source-parameter data table"
     """
 ).strip()
 

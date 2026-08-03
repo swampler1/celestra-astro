@@ -32,7 +32,6 @@ import time
 import logging
 logging.basicConfig(level=logging.INFO)
 os.makedirs("logs", exist_ok=True)
-script_dir = "/lustre/cv/users/swampler/DECO_wiki_maker"
 
 # Generate a timestamped log file
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -48,7 +47,7 @@ CHEAP_MODEL = "gpt-3.5-turbo"
 
 #CSV File load
 script_dir = os.path.dirname(os.path.abspath(__file__))
-DECO_CSV_PATH = os.path.join(script_dir, "DECO_Master_Sample_Doc_SimpleDictionary.csv")
+SOURCE_PARAMETERS_CSV_PATH = os.path.join(script_dir, "Master_Sample_Source_Parameters.csv")
 
 
 ###################################################################
@@ -58,7 +57,8 @@ def safe_slug(s: str) -> str:
     return re.sub(r'[^A-Za-z0-9._-]+', '_', s).strip('_')
 
 ###################################################################
-#Code integrated from ads_downloader.ipynb writen by Margaret Haun (UVA), edited by Cole Wampler, last updated 6/8/25.
+# Code originally developed in ads_downloader.py by Margaret Haun (UVA),
+# edited by Cole Wampler, last updated 6/8/25.
 ###################################################################
 
 # Scrapes an HTML table from a URL and returns it as a pandas DataFrame
@@ -191,26 +191,26 @@ def select_papers(disk_name_orig, score_limit = 0, paper_limit=5):
     return papers
 
 ###################################################################
-#This section loads the info for each source from the given DECO CSV file 
+#This section loads the info for each source from the given CSV file
 ###################################################################
 
-#Loading DECO table info
+#Loading source-parameter table info
 #      - Dist_DR3           -> Distance_pc
 #      - Mstar_PPVII        -> StellarMass_Msun
 #      - vsys_v2            -> SystemicVelocity_kms
-#      - PA_DECO            -> PA_deg
-#      - Inc_DECO           -> Inclination_deg
-def load_deco_basic_facts_table(csv_path: str) -> dict[str, dict[str, float | str]]:
+#      - PA_deg            -> PA_deg
+#      - Inc_deg           -> Inclination_deg
+def load_source_parameters_table(csv_path: str) -> dict[str, dict[str, float | str]]:
     try:
         df = pd.read_csv(csv_path)
     except Exception as e:
-        print(f"[WARN] Could not load DECO basic-facts table from {csv_path}: {e}")
+        print(f"[WARN] Could not load Source-parameter basic-facts table from {csv_path}: {e}")
         return {}
 
-    required_cols = ["Source", "Dist_DR3", "Mstar_PPVII", "vsys_v2", "PA_DECO", "Inc_DECO"]
+    required_cols = ["Source", "Dist_DR3", "Mstar_PPVII", "vsys_v2", "PA_deg", "Inc_deg"]
     for col in required_cols:
         if col not in df.columns:
-            print(f"[WARN] DECO table is missing required column '{col}'.")
+            print(f"[WARN] source-parameter table is missing required column '{col}'.")
             return {}
 
     table: dict[str, dict[str, float | str]] = {}
@@ -231,32 +231,32 @@ def load_deco_basic_facts_table(csv_path: str) -> dict[str, dict[str, float | st
             "Distance_pc": None if pd.isna(row["Dist_DR3"]) else float(row["Dist_DR3"]),
             "StellarMass_Msun": None if pd.isna(row["Mstar_PPVII"]) else float(row["Mstar_PPVII"]),
             "SystemicVelocity_kms": None if pd.isna(row["vsys_v2"]) else float(row["vsys_v2"]),
-            "PA_deg": None if pd.isna(row["PA_DECO"]) else float(row["PA_DECO"]),
-            "Inclination_deg": None if pd.isna(row["Inc_DECO"]) else float(row["Inc_DECO"]),
+            "PA_deg": None if pd.isna(row["PA_deg"]) else float(row["PA_deg"]),
+            "Inclination_deg": None if pd.isna(row["Inc_deg"]) else float(row["Inc_deg"]),
         }
 
-    print(f"[INFO] Loaded DECO basic-facts table with {len(table)} entries.")
+    print(f"[INFO] Loaded Source-parameter basic-facts table with {len(table)} entries.")
     return table
 
-#Looks up DECO basic facts for a target using its exact Source name
-def get_deco_basic_facts_for_source_name(source_name: str) -> dict[str, float | str]:
+#Looks up source parameters for a target using its exact Source name
+def get_source_parameters_for_source_name(source_name: str) -> dict[str, float | str]:
     if not source_name:
         return {}
     key_lower = source_name.strip().lower()
-    return DECO_BASIC_FACTS.get(key_lower, {})
+    return SOURCE_PARAMETERS.get(key_lower, {})
 
-#Loads the DECO basic-facts table at startup and reports how many entries were read
-DECO_BASIC_FACTS: dict[str, dict[str, float | str]] = load_deco_basic_facts_table(DECO_CSV_PATH)
-if not DECO_BASIC_FACTS:
-    print(f"[WARN] DECO_BASIC_FACTS is empty. Check DECO_CSV_PATH = {DECO_CSV_PATH}")
+#Loads the Source-parameter basic-facts table at startup and reports how many entries were read
+SOURCE_PARAMETERS: dict[str, dict[str, float | str]] = load_source_parameters_table(SOURCE_PARAMETERS_CSV_PATH)
+if not SOURCE_PARAMETERS:
+    print(f"[WARN] SOURCE_PARAMETERS is empty. Check SOURCE_PARAMETERS_CSV_PATH = {SOURCE_PARAMETERS_CSV_PATH}")
 else:
-    print(f"[INFO] DECO_BASIC_FACTS has {len(DECO_BASIC_FACTS)} entries.")
+    print(f"[INFO] SOURCE_PARAMETERS has {len(SOURCE_PARAMETERS)} entries.")
 
-#Formats DECO basic facts for a target into a plain-text table block
-def format_deco_basic_facts_block(source_name: str) -> str:
-    row = get_deco_basic_facts_for_source_name(source_name)
+#Formats source parameters for a target into a plain-text table block
+def format_source_parameters_block(source_name: str) -> str:
+    row = get_source_parameters_for_source_name(source_name)
     if not row:
-        return f"No DECO basic facts found for {source_name} in the DECO master sample."
+        return f"No source parameters found for {source_name} in the source-parameter table."
 
     def fmt_val(val: float | str | None, fmt: str = "{:.2f}") -> str:
         if val is None:
@@ -269,7 +269,7 @@ def format_deco_basic_facts_block(source_name: str) -> str:
         return str(val)
 
     lines = []
-    lines.append(f"Source (DECO)          : {row['Source']}")
+    lines.append(f"Source (catalog)          : {row['Source']}")
     lines.append(f"Distance (pc, DR3)     : {fmt_val(row['Distance_pc'])}")
     lines.append(f"Stellar mass (M_sun)   : {fmt_val(row['StellarMass_Msun'])}")
     lines.append(f"Systemic velocity (km/s): {fmt_val(row['SystemicVelocity_kms'])}")
@@ -622,7 +622,7 @@ def generate_article(
     model: str = "gpt-4o-mini",
     temperature: float = 0.2,
     max_tokens: int = 5000,
-    out_dir: str = "DECO_wiki_articles",
+    out_dir: str = "wiki_articles",
 ) -> str:
     """
     Generate a PLAIN TEXT wiki-style article and write it to <out_dir>/<output_basename>.txt.
@@ -721,10 +721,10 @@ for target in targets_list:
     # Use a safe slug for any filenames / directories
     canonical_path = safe_slug(canonical)
 
-    # ===== DECO BASIC FACTS LOOKUP =====
-    deco_block = format_deco_basic_facts_block(target)
-    print("DECO basic facts:")
-    print(deco_block)
+    # ===== Source-parameter BASIC FACTS LOOKUP =====
+    source_parameters_block = format_source_parameters_block(target)
+    print("source parameters:")
+    print(source_parameters_block)
     print()
 
     # --- Top-level base directories ---
@@ -782,11 +782,11 @@ for target in targets_list:
     print("Prompt built\n")
 
     prompt = alias_note + f"""
-DECO BASIC FACTS TABLE FOR {target}:
-{deco_block}
+SOURCE PARAMETERS TABLE FOR {target}:
+{source_parameters_block}
 
-USE OF DECO PARAMETERS:
-- The following global properties MUST be taken from the DECO table, not from the papers:
+USE OF SOURCE PARAMETERS:
+- The following global properties MUST be taken from the source-parameter table, not from the papers:
   (1) Distance
   (2) Stellar mass
   (3) Systemic velocity
@@ -794,7 +794,7 @@ USE OF DECO PARAMETERS:
   (5) Disk inclination
 - These values override any conflicting measurements in the paper summaries.
 - These five quantities MUST be stated clearly in the article.
-- Whenever the article mentions any of these five values, it MUST cite [DECO table] as the first source in the references section.
+- Whenever the article mentions any of these five values, it MUST cite [1].
 
 Write a wiki-style article in PLAIN TEXT summarizing the characteristics and interesting research
 around the protoplanetary disk {canonical}.
@@ -859,7 +859,7 @@ Content rules:
 In the References section, list each source as:
 [n] FirstAuthor et al., Year, Title (or description if unknown), Journal (if known), Bibcode
 
-The first reference should be the DECO Table in the style "[1] DECO data table"
+The first reference should be the Source-parameter Table in the style "[1] source-parameter data table"
 """.strip()
 
 
@@ -872,9 +872,6 @@ The first reference should be the DECO Table in the style "[1] DECO data table"
     print(f"Article written → {canonical_path}_article.txt\n")
     print("-"*72)
     print("Article(s) complete.\n")   
-
-
-
 
 
 

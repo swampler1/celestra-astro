@@ -4,7 +4,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-CHEAP_MODEL = "gpt-3.5-turbo"
+CHEAP_MODEL = "gpt-5.6-luna"
+DEFAULT_SAFETY_MAX_CHUNKS = 30
 
 from .providers.base import LLMProvider
 from .providers.factory import get_provider
@@ -20,6 +21,8 @@ from .utils import safe_slug
 
 # Splits text of PDF,s into chunks to be read by chatGPT
 def chunk_text(text: str, max_chars: int = 3500) -> list[str]:
+    if max_chars <= 0:
+        raise ValueError("max_chars must be greater than zero")
     chunks = []
     start = 0
     n = len(text)
@@ -39,7 +42,9 @@ def summarize_paper_text(
     provider: LLMProvider | None = None,
     summary_chunk_template_path: str | None = None,
     summary_merge_template_path: str | None = None,
-    max_chunks: int = 7,
+    max_chunks: int = 0,
+    chunk_size_chars: int = 3500,
+    safety_max_chunks: int = DEFAULT_SAFETY_MAX_CHUNKS,
     chunk_temperature: float = 0.2,
     chunk_max_tokens: int = 1500,
     merge_temperature: float = 0.1,
@@ -50,10 +55,17 @@ def summarize_paper_text(
     summary_chunk_template = load_template(summary_chunk_template_path, DEFAULT_SUMMARY_CHUNK_TEMPLATE)
     summary_merge_template = load_template(summary_merge_template_path, DEFAULT_SUMMARY_MERGE_TEMPLATE)
 
-    chunks = chunk_text(raw_text, max_chars=3500)
-    if len(chunks) > max_chunks:
+    chunks = chunk_text(raw_text, max_chars=chunk_size_chars)
+    if max_chunks > 0 and len(chunks) > max_chunks:
         print(f"[INFO] {bibcode}: {len(chunks)} chunks → truncating to {max_chunks}.")
         chunks = chunks[:max_chunks]
+
+    if safety_max_chunks > 0 and len(chunks) > safety_max_chunks:
+        print(
+            f"[WARN] {bibcode}: safety limit reached; processing the first "
+            f"{safety_max_chunks} of {len(chunks)} chunks."
+        )
+        chunks = chunks[:safety_max_chunks]
 
     chunk_summaries: list[str] = []
 
@@ -129,7 +141,9 @@ def ensure_summaries_for_papers(
     provider: LLMProvider | None = None,
     summary_chunk_template_path: str | None = None,
     summary_merge_template_path: str | None = None,
-    max_chunks_per_paper: int = 7,
+    max_chunks_per_paper: int = 0,
+    chunk_size_chars: int = 3500,
+    safety_max_chunks_per_paper: int = DEFAULT_SAFETY_MAX_CHUNKS,
     summary_chunk_temperature: float = 0.2,
     summary_chunk_max_tokens: int = 1500,
     summary_merge_temperature: float = 0.1,
@@ -176,6 +190,8 @@ def ensure_summaries_for_papers(
                 summary_chunk_template_path=summary_chunk_template_path,
                 summary_merge_template_path=summary_merge_template_path,
                 max_chunks=max_chunks_per_paper,
+                chunk_size_chars=chunk_size_chars,
+                safety_max_chunks=safety_max_chunks_per_paper,
                 chunk_temperature=summary_chunk_temperature,
                 chunk_max_tokens=summary_chunk_max_tokens,
                 merge_temperature=summary_merge_temperature,

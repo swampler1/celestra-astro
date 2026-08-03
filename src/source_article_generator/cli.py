@@ -14,13 +14,13 @@ def _optional_int(value):
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Run DECO wiki pipeline for one or more targets.",
+        description="Generate source articles for one or more astronomical targets.",
         formatter_class=argparse.RawTextHelpFormatter,
         epilog=(
             "Examples:\n"
-            "  PYTHONPATH=src python -m joss_deco --config configs/default.yaml --targets-file targets.txt\n"
-            "  PYTHONPATH=src python -m joss_deco --provider gemini \"TW Hya\"\n"
-            "  PYTHONPATH=src python -m joss_deco --provider openai --model gpt-4.1 --paper-limit 12 \"DL Tau\"\n"
+            "  PYTHONPATH=src python -m source_article_generator --config configs/default.yaml --targets-file targets.txt\n"
+            "  PYTHONPATH=src python -m source_article_generator --provider gemini \"TW Hya\"\n"
+            "  PYTHONPATH=src python -m source_article_generator --provider openai --model gpt-5.6-terra --paper-limit 12 \"DL Tau\"\n"
         ),
     )
 
@@ -31,7 +31,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     path_group = parser.add_argument_group("Path Overrides")
     path_group.add_argument("--output-root", default=None, help="Override output root for this run")
-    path_group.add_argument("--deco-csv-path", default=None, help="Override DECO CSV path")
+    path_group.add_argument(
+        "--source-parameters-csv-path",
+        default=None,
+        help="Override source-parameter CSV path",
+    )
     path_group.add_argument(
         "--extra-context-file",
         action="append",
@@ -53,7 +57,16 @@ def build_parser() -> argparse.ArgumentParser:
     generation_group = parser.add_argument_group("Generation Overrides")
     generation_group.add_argument("--paper-limit", default=None, help="Override max papers per target")
     generation_group.add_argument("--score-limit", default=None, help="Override SIMBAD score threshold")
-    generation_group.add_argument("--max-chunks-per-paper", default=None, help="Override max chunks per paper")
+    generation_group.add_argument(
+        "--max-chunks-per-paper",
+        default=None,
+        help="Override max chunks per paper; 0 means process the whole paper",
+    )
+    generation_group.add_argument(
+        "--chunk-size-chars",
+        default=None,
+        help="Override approximate characters per chunk",
+    )
     generation_group.add_argument("--summary-temperature", default=None, help="Override summary temperature")
     generation_group.add_argument("--article-temperature", default=None, help="Override article temperature")
     generation_group.add_argument("--summary-max-tokens", default=None, help="Override summary chunk max tokens")
@@ -71,7 +84,7 @@ def main():
     cfg = replace(
         cfg,
         output_root=cfg.output_root if args.output_root is None else args.output_root,
-        deco_csv_path=cfg.deco_csv_path if args.deco_csv_path is None else args.deco_csv_path,
+        source_parameters_csv_path=cfg.source_parameters_csv_path if args.source_parameters_csv_path is None else args.source_parameters_csv_path,
         paper_limit=cfg.paper_limit if args.paper_limit is None else _optional_int(args.paper_limit),
         score_limit=cfg.score_limit if args.score_limit is None else _optional_int(args.score_limit),
         summary_model=cfg.summary_model if args.summary_model is None else args.summary_model,
@@ -83,6 +96,7 @@ def main():
         summary_merge_max_tokens=cfg.summary_merge_max_tokens if args.summary_merge_max_tokens is None else _optional_int(args.summary_merge_max_tokens),
         article_max_tokens=cfg.article_max_tokens if args.article_max_tokens is None else _optional_int(args.article_max_tokens),
         max_chunks_per_paper=cfg.max_chunks_per_paper if args.max_chunks_per_paper is None else _optional_int(args.max_chunks_per_paper),
+        chunk_size_chars=cfg.chunk_size_chars if args.chunk_size_chars is None else _optional_int(args.chunk_size_chars),
         extra_context_files=(
             cfg.extra_context_files
             if args.extra_context_file is None

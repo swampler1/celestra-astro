@@ -44,7 +44,7 @@ The studies have also revealed the importance of understanding the torque balanc
 
 References
 
-[1] DECO data table  
+[1] source-parameter data table  
 [2] H. A. H. et al., 2021, Molecules with ALMA at Planet-forming Scales (MAPS) XIX, ApJS, 257, 19  
 [3] W. et al., 2024, Multi-epoch monitoring of accretion variability in CTTSs, ApJ, 970, 118  
 [4] H. et al., 2020, Investigating the protoplanetary disk around GM Aur, ApJ, 891, 48  

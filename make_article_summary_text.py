@@ -2,7 +2,7 @@
 from pathlib import Path
 import sys
 
-ARTICLES_DIR = Path("DECO_wiki_articles")
+ARTICLES_DIR = Path("wiki_articles")
 SUMMARIES_DIR = Path("summaries")
 OUT_DIR = Path("stitched")
 

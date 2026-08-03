@@ -15,10 +15,10 @@ def generate_article(
     prompt: str,
     output_basename: str,
     *,
-    model: str = "gpt-4o-mini",
+    model: str = "gpt-5.6-terra",
     temperature: float = 0.2,
-    max_tokens: int = 5000,
-    out_dir: str = "DECO_wiki_articles",
+    max_tokens: int = 16000,
+    out_dir: str = "wiki_articles",
     logs_dir: str = "logs",
     provider: LLMProvider | None = None,
 ) -> str:

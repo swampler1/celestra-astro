@@ -1,16 +1,16 @@
-Region,Source,Other Names,RA_Galario_deg,Dec_Galario_deg,Mstar_PPVII,Dist_DR3,vsys_v2,vsys_v2_err,vsys_v2_notes,PA_DECO,PA_DECO_Err,PA_Notes,Inc_DECO,Inc_DECO_Err,Inc_Notes
+Region,Source,Other Names,RA_Galario_deg,Dec_Galario_deg,Mstar_PPVII,Dist_DR3,vsys_v2,vsys_v2_err,vsys_v2_notes,PA_deg,PA_deg_Err,PA_Notes,Inc_deg,Inc_deg_Err,Inc_Notes
 ChaI,J11113965-7620152,XX Cha,167.9146604,-76.337508,0.248,190,5.02,0.002,,305.18,,Eddy,24.03,18.420,Literature
 ChaI,J11105333-7634319,,167.7216204,-76.575578,0.291,193.23,4.54,,,164.31,,Eddy,46.76,13.830,Literature
 ChaI,J11104959-7717517,,167.7059758,-77.297703,0.383,186.69,4.57,,,73.3,,Eddy,61.71,10.220,Literature
-ChaI,J11092379-7623207,,167.3485212,-76.389129,0.496,191.12,5.42,,,219.587,,Updated to Galario+180 (05-20-2025); DECO Dust + Gas Check,15.63,10.290,Literature
-ChaI,J11085367-7521359,,167.2231058,-75.359996,0.497,190.51,4.16,,,58.23,,Updated to Galario (05-20-2025); DECO Dust + Gas Check,37.83,22.380,Literature
-ChaI,J11173700-7704381,,169.403531,-77.077268,0.52,188.88,3.71,,,218.55,,Updated to Eddy (05-06-2025); DECO Dust + Gas Check,43.77,19.460,Literature
+ChaI,J11092379-7623207,,167.3485212,-76.389129,0.496,191.12,5.42,,,219.587,,Updated to Galario+180 (05-20-2025); Dust + Gas Check,15.63,10.290,Literature
+ChaI,J11085367-7521359,,167.2231058,-75.359996,0.497,190.51,4.16,,,58.23,,Updated to Galario (05-20-2025); Dust + Gas Check,37.83,22.380,Literature
+ChaI,J11173700-7704381,,169.403531,-77.077268,0.52,188.88,3.71,,,218.55,,Updated to Eddy (05-06-2025); Dust + Gas Check,43.77,19.460,Literature
 ChaI,J11095407-7629253,HX Cha A (pointing center),167.4746854,-76.490436,0.544,190,5.02,,,315.92,,Eddy / known binary,49.65,,Eddy / known binary
-ChaI,J11094742-7726290,,167.44691,-77.441441,0.557,191.42,5.17,,,208.087,,Updated to Galario+180 (05-20-2025); DECO Dust + Gas Check,54.12,1.930,Literature
+ChaI,J11094742-7726290,,167.44691,-77.441441,0.557,191.42,5.17,,,208.087,,Updated to Galario+180 (05-20-2025); Dust + Gas Check,54.12,1.930,Literature
 ChaI,J11123092-7644241,,168.1282504,-76.740001,0.576,194.25,4.74,,,103.4,,Eddy,24.56,19.260,Literature
 ChaI,J11100704-7629376,,167.5287167,-76.493805,0.63,190,2.04,,,128.05,,Eddy,0,,unresolved
 ChaI,J11100369-7633291,Hn11,167.5147846,-76.558125,0.646,195.75,4.91,,,211.51,,Eddy,64.77,13.920,Literature
-ChaI,J11095340-7634255,,167.4717917,-76.57375,0.65,190,5.56,,,26.11,,Updated to Luigi (05-20-2025); DECO Dust + Gas Check,51.26,3.230,Literature
+ChaI,J11095340-7634255,,167.4717917,-76.57375,0.65,190,5.56,,,26.11,,Updated to Luigi (05-20-2025); Dust + Gas Check,51.26,3.230,Literature
 ChaI,J10590108-7722407,,164.7538279,-77.378032,0.7,183.12,5.17,,,124.19,1.5,csalt; agrees with galario and eddy. ,31.52,2.029,Galario; Agrees with poorer fit in Hendler+2020. 
 ChaI,J11100469-7635452,,167.5189633,-76.595919,0.7,193.06,5.95,0.5,old,89.84,27.43,Looks off-center (05-20-2025); Hendler+20 - note CONTINUUM,60.67,25.290,Literature
 ChaI,J11080148-7742288,VW Cha,167.0057592,-77.707936,0.705,190,2.19,,,121.055,,Updated to Galario (05-06-2025); Eddy,21.6,,Eddy
@@ -18,14 +18,14 @@ ChaI,J10555973-7724399,SX Cha A (pointing center),163.9986554,-77.411142,0.79,18
 ChaI,J11075792-7738449,,166.9906646,-77.645823,0.82,190,2.92,,,288.367,,Updated to Galario+180 (05-20-2025); Eddy; added 65 degrees after check with N.Green (2025-09-24),79.218,9.243,Galario; agrees with Belloche+2011
 ChaI,J10581677-7717170,,164.5691929,-77.288096,1.27,190,5.3,,,156.185,0.217,Galario PA with csalt confirmed direction. Consistent with Hendler+2020,42.488,0.168,Galario; Agrees with poorer fit in Hendler+2020. 
 ChaI,J11114632-7620092,,167.9424371,-76.335822,1.27,191.61,4.94,,,304.08,,Eddy,56.51,12.050,Literature
-ChaI,J11081509-7733531,,167.0630304,-77.564842,1.43,190,5.06,0.2,old,160.393,,Updated to Galario (05-20-2025) but note archival data is off-center; DECO Dust + Gas Check,37,NaN,Literature
+ChaI,J11081509-7733531,,167.0630304,-77.564842,1.43,190,5.06,0.2,old,160.393,,Updated to Galario (05-20-2025) but note archival data is off-center; Dust + Gas Check,37,NaN,Literature
 Lupus,Sz66,,234.86773,-34.771831,0.291,155.92,4.63,,,260,1,Looks off-center (05-20-2025); Miley+24,68,1,Miley+24
 Lupus,Sz95,,241.9678671,-38.968504,0.291,160.47,4.68,,,75,,Yen+18,50,3.000,Yen+18
 Lupus,Sz130,,240.1292162,-41.72709,0.394,159.18,4.12,,,324.46,0.32,csalt value consistent with eddy,65.111,7.656,Galario - new fit with all EBs
 Lupus,Sz71,GWLup,236.6862462,-34.51007,0.414,155.2,3.59,,,37.1,,Eddy,38.7,0.300,Huang+18
-Lupus,Sz96,,242.0525304,-39.142777,0.463,155.98,1.24,,,58.8,,DECO Dust + Gas Check,48.9,3.000,Guerra-Alvarado+25 consistent with Galario and Eddy
-Lupus,J16124373-3815031,,243.1822112,-38.250996,0.47,159.85,4.44,,,200.86,,Updated to Luigi (05-20-2025); DECO Dust + Gas Check,43.69,7.390,Literature
-Lupus,Sz111,,242.2277592,-39.628802,0.52,158.37,4.06,,,44.604,,Updated to Galario (05-20-2025); DECO Dust + Gas Check,47.02,1.000,Eddy
+Lupus,Sz96,,242.0525304,-39.142777,0.463,155.98,1.24,,,58.8,,Dust + Gas Check,48.9,3.000,Guerra-Alvarado+25 consistent with Galario and Eddy
+Lupus,J16124373-3815031,,243.1822112,-38.250996,0.47,159.85,4.44,,,200.86,,Updated to Luigi (05-20-2025); Dust + Gas Check,43.69,7.390,Literature
+Lupus,Sz111,,242.2277592,-39.628802,0.52,158.37,4.06,,,44.604,,Updated to Galario (05-20-2025); Dust + Gas Check,47.02,1.000,Eddy
 Lupus,Sz91,,241.7981829,-39.063345,0.52,159.39,3.39,,,195.116,,Updated to Galario+180 (05-20-2025); Tsukagoshi+19 + Mauco+21,49.7,0.200,Tsukagoshi+19
 Lupus,Sz98,,242.0936317,-39.079723,0.55,156.27,3.01,,,111.022,,Updated to Galario (05-20-2025); Ansdell Dust + Gas Check,54.56,0.700,Eddy
 Lupus,Sz123A,Not Sz123B,242.7148833,-38.88732917,0.557,162.19,4.51,,luigi,155.45,0.1,Looks off-center (05-20-2025); Luigi,53.29,0.75,Luigi
@@ -41,41 +41,41 @@ Lupus,J16083070-3828268,,242.1278246,-38.474291,1.27,158.5,5.16,,,107.644,,Updat
 Lupus,Sz68,HTLup AB (pointing center),236.3034883,-34.29199,1.32,158.5,5.42,,,176,,eddy +confirm,35.411,1.379,Galario
 ROph,J162816.5-243658,,247.0687454,-24.616295,0.2075,134.98,4.02,,,293.31,,Eddy,28,NaN,Literature
 ROph,J162649.0-243825,,246.70406,-24.640489,0.292,132.51,2.37,,,128.402,,Updated to Galario (05-20-2025); Eddy,22,5.020,Literature
-ROph,J162755.6-242618,,246.9815329,-24.438517,0.368,131.65,3.03,,,354.86,,DECO Dust + Gas Check; updated (05-06-25) to Eddy,20.86,,Eddy
-ROph,J162854.1-244744,,247.2252833,-24.795803,0.396,136.46,4.32,,,180.471,,Updated to Galario (05-20-2025); DECO Dust + Gas Check,50,3.620,Literature
+ROph,J162755.6-242618,,246.9815329,-24.438517,0.368,131.65,3.03,,,354.86,,Dust + Gas Check; updated (05-06-25) to Eddy,20.86,,Eddy
+ROph,J162854.1-244744,,247.2252833,-24.795803,0.396,136.46,4.32,,,180.471,,Updated to Galario (05-20-2025); Dust + Gas Check,50,3.620,Literature
 ROph,J162616.8-242223,,246.5701675,-24.373279,0.54,137.42,1.24,,,171.4,,Eddy,38.22,,Eddy
-ROph,J162739.4-243915,,246.91425,-24.654481,0.551,135.27,3.19,,,138.782,,Updated to Galario (05-20-2025); DECO Dust + Gas Check,54,0.300,Literature
-ROph,J162645.0-242308,Elias27,246.6875704,-24.38568,0.557,110.07,2,,,118.9,,Updated to Eddy (05-06-2025); DECO Dust + Gas Check,56,0.800,Literature
-ROph,J162713.7-241817,,246.8071596,-24.304864,0.57,137.2,0.36,,,180,,DECO Dust + Gas Check,0,,unresolved
+ROph,J162739.4-243915,,246.91425,-24.654481,0.551,135.27,3.19,,,138.782,,Updated to Galario (05-20-2025); Dust + Gas Check,54,0.300,Literature
+ROph,J162645.0-242308,Elias27,246.6875704,-24.38568,0.557,110.07,2,,,118.9,,Updated to Eddy (05-06-2025); Dust + Gas Check,56,0.800,Literature
+ROph,J162713.7-241817,,246.8071596,-24.304864,0.57,137.2,0.36,,,180,,Dust + Gas Check,0,,unresolved
 ROph,J162618.9-242820,Elias20,246.5786029,-24.472317,0.5875,137.53,2.1,,,168.92,,Eddy,54.13,1.000,Eddy
 ROph,J162730.2-242743,,246.8757075,-24.462233,0.5975,139.4,7.56,,,67.77,,Eddy,87,13.000,Literature
 ROph,J162556.1-242048,,246.483949,-24.346908,0.61,134.76,4.54,,,28.77,,Eddy,17,4.160,Literature
-ROph,J162656.8-241351,,246.7365325,-24.231151,0.62,136.52,5.29,,,185.8,,DECO Dust + Gas Check; added 135 degrees after check with N.Green (2025-09-24),64,2.820,Literature
-ROph,J162636.8-241552,,246.6534279,-24.264589,0.631,136.59,4.49,,,241.8,,DECO Dust + Gas Check,31,2.410,Literature
+ROph,J162656.8-241351,,246.7365325,-24.231151,0.62,136.52,5.29,,,185.8,,Dust + Gas Check; added 135 degrees after check with N.Green (2025-09-24),64,2.820,Literature
+ROph,J162636.8-241552,,246.6534279,-24.264589,0.631,136.59,4.49,,,241.8,,Dust + Gas Check,31,2.410,Literature
 ROph,J162738.3-243658,,246.9096171,-24.616443,0.65,139.46,5.33,,,122.15,,Eddy,70,0.140,Literature
 ROph,J162623.6-242439,,246.5982287,-24.411161,0.69,139.4,1.9,,,48.555,,Updated to Galario (05-20-2025); Eddy,71,0.130,Literature
-ROph,J162739.0-235818,,246.9125,-23.97204,0.69,141.55,2.86,,,93.977,,Updated to Galario (05-20-2025); DECO Dust + Gas Check,47.17,0.800,Eddy
-ROph,J162823.3-242241,,247.0972112,-24.378121,0.69,146.81,2.09,,,67.078,,Updated to Galario (05-20-2025); DECO Dust + Gas Check,63,0.280,Literature
+ROph,J162739.0-235818,,246.9125,-23.97204,0.69,141.55,2.86,,,93.977,,Updated to Galario (05-20-2025); Dust + Gas Check,47.17,0.800,Eddy
+ROph,J162823.3-242241,,247.0972112,-24.378121,0.69,146.81,2.09,,,67.078,,Updated to Galario (05-20-2025); Dust + Gas Check,63,0.280,Literature
 ROph,J162536.7-241542,,246.4030267,-24.261993,0.84,139.4,3.93,,,145.76,,Eddy,74,1.050,Literature
 ROph,J162733.1-244115,,246.8879146,-24.687744,0.875,136.55,8.22,,,213.84,,Eddy,38.12,0.060,Eddy
 ROph,J162624.1-241613,Elias24,246.6003204,-24.270566,0.9399,139.26,3.08,,,48.358,,Updated to Galario (05-20-2025); Eddy,42.38,0.300,Eddy
-Taurus,FN Tau,,63.560875,28.46597039,0.27,129.89,6.4,0.1,DECO CS,150,,Scattered light Kudo+18,20,10,Kudo+18 (Scattered light)
+Taurus,FN Tau,,63.560875,28.46597039,0.27,129.89,6.4,0.1,CS,150,,Scattered light Kudo+18,20,10,Kudo+18 (Scattered light)
 Taurus,HO Tau,,68.83427792,22.53727333,0.275,164.48,6.38,,,283,10,Eddy - only in 12CO. Approx uncertainty value. Consistent with PA from Galario + 180. ,55,0.800,Literature
 Taurus,DM Tau,,68.453123,18.169338,0.291,144.05,5.99,0.04,old,338,,Updated (05-06-25) to Kudo+2018 +180,35.2,0.700,Literature
-Taurus,FT Tau,,65.91334542,24.93715289,0.298,130.19,7.22,,,309.037,,Updated to Galario (05-20-2025); DECO Dust + Gas Check,35.5,0.400,Literature
-Taurus,DE Tau,,65.48189167,27.91821206,0.326,128.02,5.92,0,old,30,,DECO Dust + Gas Check,34.1,1.000,Literature
-Taurus,IQ Tau,,67.46486208,26.11232931,0.422,140,5.5,,,220,,Updated to Eddy (05-20-2025); DECO Dust + Gas Check,60.8,0.100,Literature
+Taurus,FT Tau,,65.91334542,24.93715289,0.298,130.19,7.22,,,309.037,,Updated to Galario (05-20-2025); Dust + Gas Check,35.5,0.400,Literature
+Taurus,DE Tau,,65.48189167,27.91821206,0.326,128.02,5.92,0,old,30,,Dust + Gas Check,34.1,1.000,Literature
+Taurus,IQ Tau,,67.46486208,26.11232931,0.422,140,5.5,,,220,,Updated to Eddy (05-20-2025); Dust + Gas Check,60.8,0.100,Literature
 Taurus,V836 Tau,,75.77751958,25.38867344,0.475,167,7.18,,,112.517,2.3,galario but consistent with eddy and csalt,43,0.100,Literature and consistent with Galario
-Taurus,DS Tau,,71.9525238,29.41962133,0.497,158.35,5.7,,,339.504,,Updated to Galario+180 (05-20-2025); DECO Dust + Gas Check,70,3.000,Literature
+Taurus,DS Tau,,71.9525238,29.41962133,0.497,158.35,5.7,,,339.504,,Updated to Galario+180 (05-20-2025); Dust + Gas Check,70,3.000,Literature
 Taurus,GI Tau,,68.39196333,24.35461303,0.497,129.44,7.5,,,142.2,0.1,Yamaguchi+24 with direction of rotation confirmed with Archival CO 3-2 2022.1.00828.S,43.8,0.100,Literature
 Taurus,IP Tau,,66.23790083,27.19886661,0.508,129.38,6.87,,,352.2,0.6,Yamaguchi+24 and consistent with Eddy,45,0.200,Yamaguchi+24
 Taurus,GK Tau,,68.39406667,24.35149481,0.58,129.14,6.26,,,116,5,Eddy,40.2,6.200,Long+19
-Taurus,DR Tau,,71.77592625,16.97847294,0.6,140,9.9,,,3.4,,DECO Dust + Gas Check,5.4,2.600,Literature
+Taurus,DR Tau,,71.77592625,16.97847294,0.6,140,9.9,,,3.4,,Dust + Gas Check,5.4,2.600,Literature
 Taurus,CI Tau,,68.4667666,22.8416072,0.65,160.32,5.7,0.002,Law+22. Note cloud contamination,191.3,1,Law+22; resolved in CO images. Original PA from paper is 11.3 but using our PA convention; it is +180. No uncertainty reported in law+22,49.2,0.4,Law+22; Yamaguchi+24. High resolution ALMA continuum
-Taurus,DL Tau,,68.41288042,25.34380286,0.66,159.94,6.1,,,230,,Updated to Eddy (05-20-2025); DECO Dust + Gas Check,44.6,0.400,Literature
-Taurus,GM Aur,,73.79579167,30.36633778,0.69,140,5.61,,,64,,DECO Dust + Gas Check; updated (05-06-25) with +180,53.2,0.010,Literature
+Taurus,DL Tau,,68.41288042,25.34380286,0.66,159.94,6.1,,,230,,Updated to Eddy (05-20-2025); Dust + Gas Check,44.6,0.400,Literature
+Taurus,GM Aur,,73.79579167,30.36633778,0.69,140,5.61,,,64,,Dust + Gas Check; updated (05-06-25) with +180,53.2,0.010,Literature
 Taurus,LkCa 15,,69.824192,22.3508453,0.7,157.19,6.28,0.04,old,61.8,0.3,Yamaguchi+24 but direction confirmed with CO gas from Piertu+2007,50.6,0.100,andrews+11
-Taurus,DG Tau,,66.76959083,26.10432986,0.71,140,6.24,,,315.4,,DECO Dust + Gas Check; updated (05-06-25) with +180,33.5,0.100,Literature
+Taurus,DG Tau,,66.76959083,26.10432986,0.71,140,6.24,,,315.4,,Dust + Gas Check; updated (05-06-25) with +180,33.5,0.100,Literature
 Taurus,HP Tau,,68.96998792,22.9063463,0.84,140,5,1,,53.6,0.2,"Possible emission at delta_RADec of -1 and 1.2 (05-20-2025); Yamaguchi+24 - gas very confusing so this may be degenerate by 180
 ",20.3,0.100,Literature
 Taurus,CW Tau,,63.5709125,28.18255653,1.11,131.55,6.8,,,241.4,1,"CO looks off-center (05-20-2025); Ueda+22; resolved continuum at 0.06"". Using our gas data; confirm 180deg to red shifted lobe. ",58.5,2,"Ueda+22; resolved continuum at 0.06"""

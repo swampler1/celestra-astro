@@ -7,7 +7,7 @@ import sys
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from joss_deco.cli import main
+from source_article_generator.cli import main
 
 
 if __name__ == "__main__":

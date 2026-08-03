@@ -8,27 +8,31 @@ from typing import Any
 
 @dataclass
 class RunConfig:
-    deco_csv_path: str = "DECO_Master_Sample_Doc_SimpleDictionary.csv"
+    source_parameters_csv_path: str = "Master_Sample_Source_Parameters.csv"
     scraped_table_dir: str = "Scraped_Table_Data"
     paper_pdfs_root: str = "paper_pdfs"
     summaries_root: str = "summaries"
-    articles_dir: str = "DECO_wiki_articles"
+    articles_dir: str = "wiki_articles"
     logs_dir: str = "logs"
     output_root: str = ""
 
     score_limit: int = 0
     paper_limit: int = 10
 
-    summary_model: str = "gpt-4.1-mini"
-    article_model: str = "gpt-4.1"
+    summary_model: str = "gpt-5.6-luna"
+    article_model: str = "gpt-5.6-terra"
     provider: str = "openai"
     summary_temperature: float = 0.2
     summary_chunk_max_tokens: int = 1500
     summary_merge_temperature: float = 0.1
     summary_merge_max_tokens: int = 1000
     article_temperature: float = 0.2
-    article_max_tokens: int = 5000
-    max_chunks_per_paper: int = 7
+    article_max_tokens: int = 16000
+    # 0 means summarize the whole extracted paper. The safety limit prevents
+    # unexpectedly large PDFs from creating an unbounded number of API calls.
+    max_chunks_per_paper: int = 0
+    chunk_size_chars: int = 3500
+    safety_max_chunks_per_paper: int = 30
     extra_context_files: list[str] = field(default_factory=list)
     summary_chunk_template: str = "prompts/summary_chunk.txt"
     summary_merge_template: str = "prompts/summary_merge.txt"

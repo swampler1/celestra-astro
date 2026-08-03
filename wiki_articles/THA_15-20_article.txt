@@ -8,7 +8,7 @@ The disk surrounding THA 15-20 exhibits a well-defined structure with notable fe
 
 ALMA observations at various wavelengths, including bands 6 and 7, have provided high-resolution imaging of the disk. The continuum emission at 870 µm shows a concentration of large dust grains in a narrow ring located around 110 AU from the star, with a Gaussian profile indicating a width of 22.2 ± 0.5 AU [10]. The presence of a large dust cavity suggests that the disk has undergone significant evolution, potentially due to the gravitational influence of forming planets. The CO isotopologue emissions, particularly from 12CO, have been used to map the gas structure, revealing azimuthal asymmetries and spiral arms that may indicate the presence of embedded planets or other dynamical processes affecting dust accumulation [1, 5].
 
-The inclination of the disk has been measured at approximately 49.70 degrees, with a position angle of 195.12 degrees, providing essential parameters for modeling the disk's geometry and dynamics [DECO table]. The systemic velocity of the star is recorded at 3.39 km/s, which is crucial for understanding the kinematics of the gas within the disk [DECO table]. The combination of these measurements allows for a comprehensive analysis of the disk's structure and the physical processes at play.
+The inclination of the disk has been measured at approximately 49.70 degrees, with a position angle of 195.12 degrees, providing essential parameters for modeling the disk's geometry and dynamics [source-parameter table]. The systemic velocity of the star is recorded at 3.39 km/s, which is crucial for understanding the kinematics of the gas within the disk [source-parameter table]. The combination of these measurements allows for a comprehensive analysis of the disk's structure and the physical processes at play.
 
 Physical Conditions
 
@@ -16,7 +16,7 @@ The physical conditions within the disk of THA 15-20 have been characterized thr
 
 The analysis of the vertical structure of the disk reveals that the emission surfaces of CO isotopologues can be used as empirical tracers of gas pressure scale heights. The observed z/r ratios, which describe the vertical extent of the gas relative to its radial distance from the star, vary from approximately 0.1 to greater than 0.5, indicating a flared structure typical of protoplanetary disks [6]. The presence of a gas pressure bump, inferred from the dust filtering and accumulation processes, supports models of grain growth and planetesimal formation through the streaming instability [1].
 
-The mass of the central star has been estimated at approximately 0.52 M_sun, which influences the disk's thermal and dynamical properties [DECO table]. The mass accretion rate has also been found to be significant, indicating ongoing processes of material infall from the disk onto the star. The combination of these factors contributes to the overall understanding of the disk's evolution and the conditions conducive to planet formation.
+The mass of the central star has been estimated at approximately 0.52 M_sun, which influences the disk's thermal and dynamical properties [source-parameter table]. The mass accretion rate has also been found to be significant, indicating ongoing processes of material infall from the disk onto the star. The combination of these factors contributes to the overall understanding of the disk's evolution and the conditions conducive to planet formation.
 
 Observational Methods
 
@@ -36,7 +36,7 @@ The results also highlight the need for continued monitoring and high-resolution
 
 References
 
-[1] DECO data table  
+[1] source-parameter data table  
 [2] Law et al., 2023, High Spatial Resolution Observations of CO Isotopologue Line Emission in Protoplanetary Disks, ApJ, 948  
 [3] Muro-Arena et al., 2020, Observational Insights into Transitional Disks and Their Properties, MNRAS, 492  
 [4] Takami et al., 2014, High-Resolution Submillimeter and Near-Infrared Observations of Sz 91, ApJ, 783  

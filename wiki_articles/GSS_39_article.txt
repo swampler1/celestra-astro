@@ -38,7 +38,7 @@ In summary, GSS 39 serves as a compelling case study for understanding the dynam
 
 References
 
-[1] DECO data table  
+[1] source-parameter data table  
 [2] Pinte et al., 2022, Vertical distribution of CN emission in protoplanetary disks, A&A, 666A.168  
 [3] Pinte et al., 2021, Spiral structure and massive dust disk with non-Keplerian kinematics in Elias 2-27, ApJ, 914...88  
 [4] Hodge et al., 2018, Investigating the spiral morphology of protostellar discs, MNRAS, 477.1004  
