@@ -18,9 +18,9 @@ def build_parser() -> argparse.ArgumentParser:
         formatter_class=argparse.RawTextHelpFormatter,
         epilog=(
             "Examples:\n"
-            "  PYTHONPATH=src python -m source_article_generator --config configs/default.yaml --targets-file targets.txt\n"
-            "  PYTHONPATH=src python -m source_article_generator --provider gemini \"TW Hya\"\n"
-            "  PYTHONPATH=src python -m source_article_generator --provider openai --model gpt-5.6-terra --paper-limit 12 \"DL Tau\"\n"
+            "  celestra --config configs/default.yaml --targets-file targets.txt\n"
+            "  celestra --provider gemini \"TW Hya\"\n"
+            "  celestra --provider openai --model gpt-5.6-terra --paper-limit 12 \"DL Tau\"\n"
         ),
     )
 

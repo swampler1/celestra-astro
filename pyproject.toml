@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "celestra-astro"
+version = "0.1.0"
+description = "Citation-Enabled Literature Extraction and Synthesis for Target-centered Research in Astronomy"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Steven Wampler" },
+    { name = "Cole Wampler" },
+    { name = "Margaret Huan" },
+]
+dependencies = [
+    "astroquery>=0.4.7",
+    "beautifulsoup4>=4.12",
+    "openai>=1.0",
+    "pandas>=2.0",
+    "PyMuPDF>=1.23",
+    "PyYAML>=6.0",
+    "python-dotenv>=1.0",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+claude = [
+    "anthropic>=0.25",
+]
+gemini = [
+    "google-genai>=1.0",
+    "google-generativeai>=0.8",
+]
+all = [
+    "anthropic>=0.25",
+    "google-genai>=1.0",
+    "google-generativeai>=0.8",
+]
+dev = [
+    "build>=1.2",
+    "pytest>=8.0",
+    "twine>=5.0",
+]
+
+[project.scripts]
+celestra = "celestra_astro.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/swampler1/celestra-astro"
+Repository = "https://github.com/swampler1/celestra-astro"
+Issues = "https://github.com/swampler1/celestra-astro/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]

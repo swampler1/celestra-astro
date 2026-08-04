@@ -1,4 +1,6 @@
-# CELESTRA (Citation-Enabled Literature Extraction and Synthesis for Target Research in Astronomy)
+# CELESTRA
+
+CELESTRA stands for “Citation-Enabled Literature Extraction and Synthesis for Target-centered Research in Astronomy.”
 
 ## What This Repo Does
 This repository builds citation-backed wiki-style source summaries for astronomical targets by combining structured catalog values, literature sources, and LLM-generated paper summaries. User-provided catalog or observational values can be incorporated into the final article alongside literature-derived context. Given a source name, the pipeline queries SIMBAD to identify aliases and locate a user-defined number of relevant papers. It then uses Harvard ADS to retrieve PDFs, summarizes each paper in configurable chunks, and synthesizes those summaries and any user provided values into a final article with footnote-style citations. 
@@ -26,15 +28,22 @@ Step 5) Review outputs.
 - Logs end up under logs_dir/
 
 ## Installation
-To isntall the repository the user should follow this workflow.
 
-'''
-git clone https://github.com/swampler1/Source-Article-Generator
-cd Source-Article-Generator
-python -m venv .<your_venv_name>
+Install CELESTRA from a checkout with the standard Python packaging workflow:
+
+```bash
+git clone https://github.com/swampler1/celestra-astro.git
+cd celestra-astro
+python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
-'''
+python -m pip install .
+```
+
+For development, use an editable install with all optional providers and development tools:
+
+```bash
+python -m pip install -e ".[dev,all]"
+```
 
 ## API Keys Needed
 A few API keys are required to run this tool they are:
@@ -48,15 +57,18 @@ Athropic Claude: https://platform.claude.com/docs/en/api/overview
 
 
 ## Quickstart
-A basic version of the command to run the tool:
+
+After installation, run CELESTRA with:
+
 ```bash
-PYTHONPATH=src python -m source_article_generator --config configs/default.yaml --targets-file targets.txt
+celestra --config configs/default.yaml --targets-file targets.txt
 ```
-Where: 
--PYTHONPATH=src tells Python to look in the src/ directory so it can import the source_article_generator package.
--python -m source_article_generator runs the source_article_generator module as a command-line program.
---config is the path to the config file
---targets-file is the path to the targets.txt file/
+
+The module form is also available during development:
+
+```bash
+python -m celestra_astro --config configs/default.yaml --targets-file targets.txt
+```
 
 
 ## Main Inputs You Can Change
@@ -156,6 +168,8 @@ This lets users test prompt variants or adapt the pipeline to different writing 
 
 The path to the master source-parameter table is controlled by source_parameters_csv_path in the config file. This CSV lets you provide a catalog of fixed source values drawn from your own observational dataset or curated table.
 
+The public repository does not distribute the local master table. Provide your own table and either place it at the configured path or pass `--source-parameters-csv-path` when running CELESTRA.
+
 These values are meant to act as the authoritative global parameters for each source and are injected directly into the article prompt rather than being inferred from the literature summaries. For example, values such as distance, stellar mass, and disk inclination can be supplied in this file and treated as fixed inputs for article generation.
 
 This allows you to keep a consistent set of source-level parameters across all generated articles, even when the literature contains multiple or conflicting measurements.
@@ -178,7 +192,7 @@ In addition to the command-line workflow, the pipeline can also be run directly 
 A simple example looks like this:
 
 #Code-----------------------------------------------------
-from source_article_generator import RunConfig, run_targets
+from celestra_astro import RunConfig, run_targets
 
 cfg = RunConfig(
     provider="openai",
@@ -196,6 +210,10 @@ run_targets(["DG Tau"], config=cfg)
 
 This provides an alternative to the CLI, but for most users the config-file plus command-line workflow will be the easier and more natural way to run the tool.
 
+## Packaging Notes
+
+The wheel contains the `celestra_astro` Python package and its installed command-line entry point. Repository-level run assets are intentionally kept outside the package: `configs/`, `prompts/`, `targets.txt`, generated-output directories, and the local source-parameter CSV are not included in the wheel. Run CELESTRA from a repository checkout, or provide equivalent paths with a custom configuration file.
+
 ## Important Gotchas
 
 
@@ -206,7 +224,7 @@ The repository is organized around a refactored pipeline in src/, with configura
 ### Main Directories
 
 src/
-Main package code for the refactored pipeline.
+Main CELESTRA package code.
 
 configs/
 YAML config files for standard runs and experiments.
@@ -235,7 +253,7 @@ Separate run-specific outputs for experiments and prompt comparisons.
 ### Main Scripts and Files
 
 run_generator.py
-Thin wrapper that launches the source article generation pipeline.
+Thin wrapper that launches the CELESTRA pipeline.
 
 wiki_writer.py
 Older monolithic script kept mainly for historical reference.
@@ -249,13 +267,13 @@ Helper script for stitching an article together with its summaries into one text
 test_summarize_pdf.py
 Small standalone test script for PDF summarization.
 
-requirements.txt
-Python dependency list for the project.
+pyproject.toml
+Package metadata, dependencies, optional provider extras, and the `celestra` command-line entry point.
 
 targets.txt
 Example newline-delimited list of targets to run.
 
 Master_Sample_Source_Parameters.csv
-Example master source-parameter table used by the pipeline.
+Local source-parameter table used by the pipeline; this private data file is not part of the public package.
 
 ## Notes on Current State

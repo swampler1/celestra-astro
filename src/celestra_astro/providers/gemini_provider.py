@@ -21,16 +21,16 @@ class GeminiProvider(LLMProvider):
         if not api_key:
             raise RuntimeError("GEMINI_API_KEY is not set.")
 
-        self._request_limit = max(1, int(os.getenv("SOURCE_ARTICLE_GENERATOR_GEMINI_REQUEST_LIMIT", "5")))
-        self._window_seconds = max(1.0, float(os.getenv("SOURCE_ARTICLE_GENERATOR_GEMINI_WINDOW_SECONDS", "65")))
-        self._max_retries = max(0, int(os.getenv("SOURCE_ARTICLE_GENERATOR_GEMINI_MAX_RETRIES", "8")))
+        self._request_limit = max(1, int(os.getenv("CELESTRA_GEMINI_REQUEST_LIMIT", "5")))
+        self._window_seconds = max(1.0, float(os.getenv("CELESTRA_GEMINI_WINDOW_SECONDS", "65")))
+        self._max_retries = max(0, int(os.getenv("CELESTRA_GEMINI_MAX_RETRIES", "8")))
         self._default_retry_seconds = max(
             1.0,
-            float(os.getenv("SOURCE_ARTICLE_GENERATOR_GEMINI_DEFAULT_RETRY_SECONDS", "35")),
+            float(os.getenv("CELESTRA_GEMINI_DEFAULT_RETRY_SECONDS", "35")),
         )
         self._max_retry_seconds = max(
             self._default_retry_seconds,
-            float(os.getenv("SOURCE_ARTICLE_GENERATOR_GEMINI_MAX_RETRY_SECONDS", "90")),
+            float(os.getenv("CELESTRA_GEMINI_MAX_RETRY_SECONDS", "90")),
         )
         self._backend = ""
         self._genai: Any | None = None

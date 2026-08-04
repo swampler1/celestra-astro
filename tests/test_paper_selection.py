@@ -8,7 +8,7 @@ import dotenv
 
 dotenv.load_dotenv = lambda *args, **kwargs: None
 
-from source_article_generator.sources import select_papers
+from celestra_astro.sources import select_papers
 
 
 AUTHORS_COLUMN = "First \n3\n Authors"

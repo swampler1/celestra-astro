@@ -4,7 +4,7 @@ import datetime
 import logging
 import os
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(dotenv_path=os.path.join(os.getcwd(), ".env"), override=False)
 
 from .providers.base import LLMProvider
 from .providers.factory import get_provider

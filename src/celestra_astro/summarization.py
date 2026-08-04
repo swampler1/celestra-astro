@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(dotenv_path=os.path.join(os.getcwd(), ".env"), override=False)
 
 CHEAP_MODEL = "gpt-5.6-luna"
 DEFAULT_SAFETY_MAX_CHUNKS = 30
