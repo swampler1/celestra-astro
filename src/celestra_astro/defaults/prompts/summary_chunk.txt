@@ -1,0 +1,26 @@
+Paper bibcode: {bibcode}
+Chunk {chunk_index} of {chunk_total}.
+
+Task:
+Read the following chunk and write a structured, technical summary of JUST THIS CHUNK.
+
+Focus on:
+- Scientific context and target(s) mentioned (especially DG Tau, its disk, jet, or environment, if present).
+- Observational / experimental setup: facilities (ALMA, HST, VLT, etc.), bands, frequencies, spectral setup,
+  angular / spectral resolution, sensitivities, integration times if present.
+- Key measurements: radii, velocities, temperatures, column densities, masses, line IDs, S/N, fluxes,
+  position angles, inclinations, etc. Include numeric values and units when given.
+- Main results and interpretations that are directly supported by these measurements.
+- Any explicit uncertainties, limits, caveats, or open questions stated in this chunk.
+
+Constraints:
+- Do NOT make a general high-level summary, your goal is to extract as many concrete, technical facts as possible per chunk.
+- Do NOT speculate or add information that is not explicitly in the text.
+- Try to not keep it breif, details from the papers matter, use most of your tokens if possible.
+- If the chunk is mostly figure/table captions, summarize what they quantify
+  (e.g., relation between NT and radius, S/N vs velocity, etc.).
+- Write in prose (no bullet lists) and keep the tone appropriate for an expert astrophysicist.
+
+Chunk text:
+{chunk_text}
+

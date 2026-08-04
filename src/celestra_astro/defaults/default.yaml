@@ -1,0 +1,36 @@
+source_parameters_csv_path: Master_Sample_Source_Parameters.csv
+scraped_table_dir: Scraped_Table_Data
+paper_pdfs_root: paper_pdfs
+summaries_root: summaries
+articles_dir: wiki_articles
+logs_dir: logs
+output_root: ""
+
+score_limit: 0
+# 0 means dynamic selection with no hard paper-count cap.
+paper_limit: 0
+# Papers must reach this fraction of the target's maximum SIMBAD score.
+score_threshold_mode: relative
+score_threshold_fraction: 0.28
+# Used only when score_threshold_mode is stddev.
+score_stddevs_below_max: 1.0
+
+summary_model: gpt-5.6-luna
+article_model: gpt-5.6-terra
+provider: openai
+summary_temperature: 0.2
+summary_chunk_max_tokens: 1500
+summary_merge_temperature: 0.1
+summary_merge_max_tokens: 1000
+article_temperature: 0.2
+article_max_tokens: 16000
+# 0 means process the whole paper; use a positive value to cap chunks per paper.
+max_chunks_per_paper: 0
+# Approximate text size sent to the model for each chunk.
+chunk_size_chars: 3500
+# Hard safety ceiling for unusually large PDFs (about 105,000 characters).
+safety_max_chunks_per_paper: 30
+extra_context_files: []
+summary_chunk_template: package://prompts/summary_chunk.txt
+summary_merge_template: package://prompts/summary_merge.txt
+article_template: package://prompts/article.txt

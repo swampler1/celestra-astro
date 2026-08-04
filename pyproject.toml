@@ -55,3 +55,13 @@ Issues = "https://github.com/swampler1/celestra-astro/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+celestra_astro = [
+    "defaults/default.yaml",
+    "defaults/prompts/*.txt",
+    "defaults/targets.txt",
+]

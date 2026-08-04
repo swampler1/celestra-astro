@@ -16,6 +16,9 @@ from .utils import safe_slug
 
 
 def _resolve_path(base: str | None, path: str) -> str:
+    if path.startswith("package://"):
+        package_path = Path(__file__).resolve().parent / path.removeprefix("package://")
+        return str(package_path)
     p = Path(path)
     if p.is_absolute():
         return str(p)

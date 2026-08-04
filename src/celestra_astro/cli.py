@@ -3,7 +3,12 @@ from __future__ import annotations
 import argparse
 from dataclasses import replace
 
-from .config import RunConfig, load_config_file
+from .config import (
+    RunConfig,
+    load_config_file,
+    packaged_default_config_path,
+    packaged_default_targets_path,
+)
 from .providers.factory import default_model_for
 from .pipeline import run_targets
 
@@ -104,7 +109,7 @@ def main():
     parser = build_parser()
     args = parser.parse_args()
 
-    cfg = load_config_file(args.config or None)
+    cfg = load_config_file(args.config or packaged_default_config_path())
     cfg = replace(
         cfg,
         output_root=cfg.output_root if args.output_root is None else args.output_root,
@@ -153,8 +158,9 @@ def main():
         cfg = replace(cfg, summary_model=args.model, article_model=args.model)
 
     targets = list(args.targets)
-    if args.targets_file:
-        with open(args.targets_file, "r", encoding="utf-8") as f:
+    targets_file = args.targets_file or packaged_default_targets_path()
+    if targets_file:
+        with open(targets_file, "r", encoding="utf-8") as f:
             for line in f:
                 t = line.strip()
                 if t and not t.startswith("#"):

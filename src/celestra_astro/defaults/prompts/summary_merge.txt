@@ -1,0 +1,23 @@
+Paper bibcode: {bibcode}
+
+Task:
+Combine the following partial summaries (each derived from different chunks of the paper) into ONE coherent,
+technical summary of the entire paper, suitable for another expert.
+
+Focus on:
+- The main scientific context and motivation.
+- Observational / experimental setup: instruments, facilities, bands, spectral and spatial resolution, sensitivities.
+- Key measurements and numerical results (radii, velocities, temperatures, column densities, masses, line fluxes, S/N, etc.).
+- DG Tau-specific results, if the paper includes DG Tau (e.g. jet properties, disk structure, outflows, line emission).
+- Main conclusions and how they follow from the data.
+- Important caveats, uncertainties, or limits explicitly mentioned.
+
+Constraints:
+- Do NOT speculate or add any results not supported by the partial summaries.
+- If DG Tau is not a target of the paper, make that clear and summarize what the paper *does* focus on.
+- Avoid redundancy: if multiple chunks say the same thing, state it once, clearly.
+- Write in coherent paragraphs (no bullet lists).
+
+Partial summaries:
+{joined_summaries}
+

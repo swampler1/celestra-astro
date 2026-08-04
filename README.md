@@ -212,7 +212,7 @@ This provides an alternative to the CLI, but for most users the config-file plus
 
 ## Packaging Notes
 
-The wheel contains the `celestra_astro` Python package and its installed command-line entry point. Repository-level run assets are intentionally kept outside the package: `configs/`, `prompts/`, `targets.txt`, generated-output directories, and the local source-parameter CSV are not included in the wheel. Run CELESTRA from a repository checkout, or provide equivalent paths with a custom configuration file.
+The wheel contains the `celestra_astro` Python package and its installed command-line entry point, including built-in default configuration, prompt resources, and a blank default target list. If `--config` or `--targets-file` is omitted, CELESTRA uses those packaged defaults. Repository-level run assets such as `configs/`, `prompts/`, the checkout-level `targets.txt`, generated-output directories, and the local source-parameter CSV are not included in the wheel. A local source-parameter table is an external input and must be supplied separately.
 
 ## Important Gotchas
 

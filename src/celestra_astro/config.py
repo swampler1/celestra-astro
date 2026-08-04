@@ -6,6 +6,21 @@ from pathlib import Path
 from typing import Any
 
 
+PACKAGE_DEFAULTS_DIR = Path(__file__).resolve().parent / "defaults"
+
+
+def packaged_default_config_path() -> str:
+    return str(PACKAGE_DEFAULTS_DIR / "default.yaml")
+
+
+def packaged_default_targets_path() -> str:
+    return str(PACKAGE_DEFAULTS_DIR / "targets.txt")
+
+
+def packaged_default_prompt_path(filename: str) -> str:
+    return str(PACKAGE_DEFAULTS_DIR / "prompts" / filename)
+
+
 @dataclass
 class RunConfig:
     source_parameters_csv_path: str = "Master_Sample_Source_Parameters.csv"
@@ -41,9 +56,9 @@ class RunConfig:
     chunk_size_chars: int = 3500
     safety_max_chunks_per_paper: int = 30
     extra_context_files: list[str] = field(default_factory=list)
-    summary_chunk_template: str = "prompts/summary_chunk.txt"
-    summary_merge_template: str = "prompts/summary_merge.txt"
-    article_template: str = "prompts/article.txt"
+    summary_chunk_template: str = packaged_default_prompt_path("summary_chunk.txt")
+    summary_merge_template: str = packaged_default_prompt_path("summary_merge.txt")
+    article_template: str = packaged_default_prompt_path("article.txt")
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "RunConfig":
