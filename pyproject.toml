@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "celestra-astro"
 version = "0.1.0"
-description = "Citation-Enabled Literature Extraction and Synthesis for Target-centered Research in Astronomy"
+description = "Citation-Enabled Literature Extraction and Synthesis for Target Research in Astronomy"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "BSD-3-Clause"
