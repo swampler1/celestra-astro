@@ -16,8 +16,15 @@ class RunConfig:
     logs_dir: str = "logs"
     output_root: str = ""
 
+    # score_limit is retained for explicit absolute-threshold selection.
     score_limit: int = 0
-    paper_limit: int = 10
+    # 0 means dynamic selection with no hard paper-count cap.
+    paper_limit: int = 0
+    score_threshold_mode: str = "relative"
+    # Select papers scoring at least this fraction of the target's maximum.
+    score_threshold_fraction: float = 0.28
+    # Used only when score_threshold_mode is "stddev".
+    score_stddevs_below_max: float = 1.0
 
     summary_model: str = "gpt-5.6-luna"
     article_model: str = "gpt-5.6-terra"

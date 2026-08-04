@@ -7,7 +7,13 @@ logs_dir: logs
 output_root: ""
 
 score_limit: 0
-paper_limit: 10
+# 0 means dynamic selection with no hard paper-count cap.
+paper_limit: 0
+# Papers must reach this fraction of the target's maximum SIMBAD score.
+score_threshold_mode: relative
+score_threshold_fraction: 0.28
+# Used only when score_threshold_mode is stddev.
+score_stddevs_below_max: 1.0
 
 summary_model: gpt-5.6-luna
 article_model: gpt-5.6-terra

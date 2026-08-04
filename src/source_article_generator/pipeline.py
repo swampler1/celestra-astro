@@ -178,6 +178,9 @@ def run_targets(targets_list, config: RunConfig | None = None, project_root: str
             score_limit=cfg.score_limit,
             paper_limit=cfg.paper_limit,
             scraped_table_dir=scraped_table_dir,
+            score_threshold_mode=cfg.score_threshold_mode,
+            score_threshold_fraction=cfg.score_threshold_fraction,
+            score_stddevs_below_max=cfg.score_stddevs_below_max,
         )
 
         if not papers:
@@ -186,7 +189,14 @@ def run_targets(targets_list, config: RunConfig | None = None, project_root: str
 
         print(f"Selected {len(papers)} paper(s):")
         for p in papers:
-            print(f"    - {p['bibcode']}")
+            authors = str(p.get("authors", "")).strip()
+            if authors and authors.lower() != "nan":
+                first_author = authors.split(",", 1)[0].strip()
+                first_author = first_author.removesuffix(" et al.").strip()
+                author_note = f" — {first_author}"
+            else:
+                author_note = ""
+            print(f"    - {p['bibcode']}{author_note}")
         print()
 
         print("[STEP] Preparing PDF + Summary pipeline...")

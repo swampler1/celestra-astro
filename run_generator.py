@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Thin runner for the refactored modular pipeline."""
+"""Thin runner for the source article generation pipeline."""
 
 from pathlib import Path
 import sys

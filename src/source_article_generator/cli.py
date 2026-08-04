@@ -55,8 +55,32 @@ def build_parser() -> argparse.ArgumentParser:
     provider_group.add_argument("--article-model", default=None, help="Override article model")
 
     generation_group = parser.add_argument_group("Generation Overrides")
-    generation_group.add_argument("--paper-limit", default=None, help="Override max papers per target")
-    generation_group.add_argument("--score-limit", default=None, help="Override SIMBAD score threshold")
+    generation_group.add_argument(
+        "--paper-limit",
+        default=None,
+        help="Hard cap on papers per target; 0 means dynamic selection with no cap",
+    )
+    generation_group.add_argument(
+        "--score-limit",
+        default=None,
+        help="Absolute SIMBAD score threshold; used with --score-threshold-mode absolute",
+    )
+    generation_group.add_argument(
+        "--score-threshold-mode",
+        default=None,
+        choices=["relative", "stddev", "absolute"],
+        help="Dynamic score rule: relative max fraction (default), standard deviation, or absolute",
+    )
+    generation_group.add_argument(
+        "--score-threshold-fraction",
+        default=None,
+        help="Relative mode: minimum fraction of each target's maximum score (default 0.28)",
+    )
+    generation_group.add_argument(
+        "--score-stddevs-below-max",
+        default=None,
+        help="Stddev mode: number of score standard deviations below the target maximum",
+    )
     generation_group.add_argument(
         "--max-chunks-per-paper",
         default=None,
@@ -87,6 +111,21 @@ def main():
         source_parameters_csv_path=cfg.source_parameters_csv_path if args.source_parameters_csv_path is None else args.source_parameters_csv_path,
         paper_limit=cfg.paper_limit if args.paper_limit is None else _optional_int(args.paper_limit),
         score_limit=cfg.score_limit if args.score_limit is None else _optional_int(args.score_limit),
+        score_threshold_mode=(
+            cfg.score_threshold_mode
+            if args.score_threshold_mode is None
+            else args.score_threshold_mode
+        ),
+        score_threshold_fraction=(
+            cfg.score_threshold_fraction
+            if args.score_threshold_fraction is None
+            else float(args.score_threshold_fraction)
+        ),
+        score_stddevs_below_max=(
+            cfg.score_stddevs_below_max
+            if args.score_stddevs_below_max is None
+            else float(args.score_stddevs_below_max)
+        ),
         summary_model=cfg.summary_model if args.summary_model is None else args.summary_model,
         article_model=cfg.article_model if args.article_model is None else args.article_model,
         provider=cfg.provider if args.provider is None else args.provider,

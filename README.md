@@ -101,7 +101,10 @@ summaries_root: summaries
 articles_dir: wiki_articles
 logs_dir: logs
 
-paper_limit: 10
+paper_limit: 0
+score_threshold_mode: relative
+score_threshold_fraction: 0.28
+score_stddevs_below_max: 1.0
 max_chunks_per_paper: 0
 chunk_size_chars: 3500
 
@@ -117,7 +120,10 @@ summary_merge_template: prompts/summary_merge.txt
 In this example:
 - source_parameters_csv_path points to the master source-parameter table.
 - scraped_table_dir, paper_pdfs_root, summaries_root, articles_dir, and logs_dir control where intermediate and final files are stored.
-- paper_limit sets how many papers are used per target.
+- paper_limit is an optional hard cap on papers per target. A value of 0 enables dynamic selection with no count cap.
+- score_threshold_mode controls dynamic paper selection. The default relative mode compares each paper with that target's maximum SIMBAD score; stddev mode uses a number of standard deviations below that maximum; absolute mode uses score_limit for legacy/manual runs.
+- score_threshold_fraction is the minimum fraction of the target's maximum SIMBAD score. The default 0.28 selects papers scoring at least 28% of that target's maximum.
+- score_stddevs_below_max controls the stddev mode.
 - max_chunks_per_paper sets how much of each paper is summarized. A value of 0 processes the whole paper, subject to the safety limit in the configuration.
 - chunk_size_chars controls the approximate size of each text chunk sent to the model.
 - provider, summary_model, and article_model choose the LLM backend and models.
@@ -178,7 +184,9 @@ cfg = RunConfig(
     provider="openai",
     summary_model="gpt-5.6-luna",
     article_model="gpt-5.6-terra",
-    paper_limit=10,
+    paper_limit=0,
+    score_threshold_mode="relative",
+    score_threshold_fraction=0.28,
     max_chunks_per_paper=0,
     article_template="prompts/article.txt",
 )
@@ -226,8 +234,8 @@ Separate run-specific outputs for experiments and prompt comparisons.
 
 ### Main Scripts and Files
 
-run_refactor.py
-Thin wrapper that launches the refactored pipeline.
+run_generator.py
+Thin wrapper that launches the source article generation pipeline.
 
 wiki_writer.py
 Older monolithic script kept mainly for historical reference.

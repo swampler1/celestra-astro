@@ -151,34 +151,84 @@ def get_disk_lit(disk_name_orig, save_dir="Scraped_Table_Data"):
         df_sorted.to_csv(save_dir + "/%s_scraped_table.csv" % (disk_name_file), index=False)  # Save to CSV
 
 
-# Selects top papers for a disk from the scraped SIMBAD table based on score and limit
-def select_papers(disk_name_orig, score_limit=0, paper_limit=5, scraped_table_dir="Scraped_Table_Data"):
+# Select papers from a SIMBAD literature table using a target-relative score
+# threshold. SIMBAD scores are target-dependent, so an absolute score is not a
+# useful default across disks.
+def select_papers(
+    disk_name_orig,
+    score_limit=0,
+    paper_limit=0,
+    scraped_table_dir="Scraped_Table_Data",
+    score_threshold_mode="relative",
+    score_threshold_fraction=0.28,
+    score_stddevs_below_max=1.0,
+):
+    """Select relevant papers using a target-relative SIMBAD score rule.
+
+    By default, every paper scoring at least ``score_threshold_fraction`` of
+    the target's maximum score is selected. ``paper_limit`` is only a hard
+    cap when it is positive; zero leaves the dynamic result uncapped.
+    """
     # Create version of disk name for file reading
     disk_name_file = safe_slug(disk_name_orig)
 
-    papers = []
+    table_path = os.path.join(
+        scraped_table_dir,
+        disk_name_file + "_scraped_table.csv",
+    )
+    df_literature = pd.read_csv(table_path, index_col=False)
+    if "Score" not in df_literature.columns or "Bibcode/DOI" not in df_literature.columns:
+        raise ValueError(f"Literature table {table_path} is missing Score or Bibcode/DOI columns.")
 
-    # Read CSV
-    df_Literature = pd.read_csv(os.path.join(scraped_table_dir, disk_name_file + r"_scraped_table.csv"), index_col=False)
+    scores = pd.to_numeric(df_literature["Score"], errors="coerce")
+    valid = df_literature.loc[scores.notna()].copy()
+    valid["Score"] = scores.loc[valid.index].astype(float)
+    valid = valid.sort_values("Score", ascending=False, kind="stable")
 
-    count = 0
-    for i in range(len(df_Literature)):
-        if count >= paper_limit:
-            break
-        if df_Literature["Score"][i] > score_limit:
-            bibcode = df_Literature["Bibcode/DOI"][i]
-            authors = df_Literature["First \n3\n Authors"][i]  # Use exact column name
-            papers.append({"bibcode": bibcode, "authors": authors})
-            count += 1
+    if valid.empty:
+        print(f"No scored literature exists for {disk_name_orig}.")
+        return []
 
-    num_papers = len(papers)
-    if num_papers == 0:
-        print(f"No literature exists for {disk_name_orig} within given parameters. Consider adjusting your score limit.")
-    elif num_papers == 1:
-        print(f"Only 1 paper found for {disk_name_orig} with SIMBAD score over {score_limit}")
-    elif num_papers < paper_limit:
-        print(f"Only {num_papers} papers found for {disk_name_orig} with SIMBAD scores over {score_limit}")
+    max_score = float(valid["Score"].max())
+    mode = (score_threshold_mode or "relative").strip().lower()
+    if mode == "relative":
+        if not 0 <= float(score_threshold_fraction) <= 1:
+            raise ValueError("score_threshold_fraction must be between 0 and 1.")
+        threshold = max_score * float(score_threshold_fraction)
+        criterion = f"at least {float(score_threshold_fraction):.0%} of max score {max_score:.0f}"
+    elif mode in {"stddev", "standard_deviation", "standard-deviation"}:
+        stddevs = float(score_stddevs_below_max)
+        if stddevs < 0:
+            raise ValueError("score_stddevs_below_max must be non-negative.")
+        score_std = float(valid["Score"].std(ddof=0))
+        threshold = max_score - stddevs * score_std
+        criterion = f"within {stddevs:g} standard deviation(s) below max score {max_score:.0f}"
+    elif mode in {"absolute", "fixed"}:
+        threshold = float(score_limit)
+        criterion = f"score at least {threshold:g}"
     else:
-        print(f"{num_papers} papers found for {disk_name_orig}")
+        raise ValueError(
+            "score_threshold_mode must be 'relative', 'stddev', or 'absolute'."
+        )
+
+    selected = valid.loc[valid["Score"] >= threshold]
+    threshold_count = len(selected)
+    if paper_limit and int(paper_limit) > 0:
+        selected = selected.head(int(paper_limit))
+
+    papers = []
+    authors_column = "First \n3\n Authors"
+    for _, row in selected.iterrows():
+        authors = row[authors_column] if authors_column in selected.columns else ""
+        papers.append({"bibcode": row["Bibcode/DOI"], "authors": authors})
+
+    if not papers:
+        print(f"No literature exists for {disk_name_orig} meeting the dynamic score criterion ({criterion}).")
+    else:
+        cap_note = f"; hard cap {int(paper_limit)}" if paper_limit and int(paper_limit) > 0 else ""
+        print(
+            f"Selected {len(papers)} of {threshold_count} papers for {disk_name_orig} "
+            f"({criterion}{cap_note})."
+        )
 
     return papers
