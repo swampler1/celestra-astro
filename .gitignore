@@ -16,6 +16,9 @@ stitched/
 Scraped_Table_Data/
 paper_pdfs/
 
+# Local/private source-parameter data
+Master_Sample_Source_Parameters.csv
+
 # Jupyter
 .ipynb_checkpoints/
 
