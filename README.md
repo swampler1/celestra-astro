@@ -1,4 +1,4 @@
-# Source Article Generator
+# CELESTRA
 
 ## What This Repo Does
 This repository builds citation-backed wiki-style source summaries for astronomical targets by combining structured catalog values, literature sources, and LLM-generated paper summaries. User-provided catalog or observational values can be incorporated into the final article alongside literature-derived context. Given a source name, the pipeline queries SIMBAD to identify aliases and locate a user-defined number of relevant papers. It then uses Harvard ADS to retrieve PDFs, summarizes each paper in configurable chunks, and synthesizes those summaries and any user provided values into a final article with footnote-style citations. 
