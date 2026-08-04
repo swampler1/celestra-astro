@@ -1,0 +1,30 @@
+# This file is for standalone/legacy repository utilities only.
+# It is NOT required to install CELESTRA. Use `python -m pip install .`
+# (or `python -m pip install -e ".[dev,all]"` for development).
+
+# Dependencies shared with the CELESTRA runtime.
+astroquery>=0.4.7
+beautifulsoup4>=4.12
+openai>=1.0
+pandas>=2.0
+PyMuPDF>=1.23
+PyYAML>=6.0
+python-dotenv>=1.0
+requests>=2.31
+
+# Optional LLM providers supported by the package.
+anthropic>=0.25
+google-genai>=1.0
+google-generativeai>=0.8
+
+# Dependencies used by repository-level standalone utilities.
+ads>=0.12
+astropy>=5.0
+numpy>=1.20
+pdfplumber>=0.10
+tiktoken>=0.7
+
+# Development and packaging tools.
+build>=1.2
+pytest>=8.0
+twine>=5.0
