@@ -1,0 +1,70 @@
+SOURCE PARAMETERS TABLE FOR {target}:
+{source_parameters_block}
+
+USE OF SOURCE PARAMETERS:
+- The following global properties MUST be taken from the source-parameter table, not from the papers:
+  (1) Distance
+  (2) Stellar mass
+  (3) Systemic velocity
+  (4) Disk position angle (PA)
+  (5) Disk inclination
+- These values override any conflicting measurements in the paper summaries, and indicate in the article when a value is overwritten. 
+- Whenever the article mentions any of these five values, it MUST cite "[1; DEC/O]".
+
+Write a wiki-style article in markdown appropriate for a Google Document summarizing the characteristics and interesting research
+around the specific protoplanetary disk. 
+
+You are given technical summaries of each paper. Use ONLY these summaries as your information sources; do not invent facts beyond them.
+
+This article is for an expert reader. Avoid general knowledge or broad statements.
+ 
+Particular features of interest include: if the disk is compact or extended, known rings/gaps or asymmetries, presence of outflows/jets, interactions with environment, multiplicity. Only discuss if these have been found before, and don't comment if they haven't. Back up findings using the specific observational methods (instruments, arrays/configurations, wavelengths, spectral setups,
+  analysis techniques). Include caveats or uncertainties where available.  Avoid comparison with other sources. 
+  
+Prioritize information in the abstract and results sections of the article, and use methods or observations when needed to support claims.
+
+PAPER SUMMARIES (indexed [n] matching the source list):
+{summaries_block}
+
+SOURCES (index → bibcode):
+{sources_str}
+
+Formatting rules for the OUTPUT:
+- No bullet lists, no numbered lists, no code blocks, no **bold** or *italic*.
+- Organize with simple section titles written on their own lines (for example:
+  Overview and System Properties
+  Key Results
+  References)
+
+Length and depth requirements:
+- The overall article should be at least 500 words; do not be high-level when detailed information is available in the summaries.
+- If the summaries provide many specific measurements, methods, and physical interpretations, it is acceptable (and preferred) for the article to be longer than 800 words.
+- Articles should be no longer than 1200 words.
+
+Use of sources:
+- Use information from all of the provided paper summaries; do not ignore a source unless it is clearly irrelevant.
+- When multiple papers address the same topic (for example, jet velocities, knot spacing, or radio shocks), compare and synthesize their results instead of repeating the same generic statements, but be concise.
+- Prefer sentences that contain specific numbers, methods, and uncertainties over vague qualitative phrases.
+
+Object specificity:
+- Only attribute numerical values and detailed properties to {canonical} when the summaries clearly state they refer to this object. If a number or result is explicitly for a different system (e.g. another comparison disk), omit it.
+
+Content rules:
+- Each main section should contain specific numbers and methods wherever possible, not just
+  qualitative descriptions.
+- Every time you use information from a paper summary, you MUST add an inline citation
+  immediately after the relevant clause or sentence, in square brackets, using the
+  index of the paper, e.g. [2], [3], [4].
+- If a sentence combines information from multiple papers, include all relevant indices,
+  e.g. [2, 4, 6].
+- If a summary block says "(No summary available.)", ignore that source and do not cite it.
+- If the summaries collectively do not provide a detail (e.g., a specific mass or radius), state that the
+  value is not well constrained based on the information provided instead of inventing a number.
+- Avoid speculation or hallucination; stay within what can be reasonably inferred from the
+  provided summaries.
+
+In the References section, list each source as:
+[n] FirstAuthor et al., Year, Title (or description if unknown), Journal (if known), Bibcode
+
+The first reference should be the Source-parameter Table in the style "[1] source-parameter data table"
+
